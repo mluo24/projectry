@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import Header from './Header';
 
-const Main = () => {
+type Props = { readonly children: ReactNode }
+
+const Main = (props: Props) => {
 
     const links = [
         {title : "Categories", path : "/"},
@@ -11,7 +13,8 @@ const Main = () => {
 
     return (
         <div>
-            <Header links={links}/>
+            <Header title="Projectry" links={links}/>
+            {props.children}
         </div>
     );
     

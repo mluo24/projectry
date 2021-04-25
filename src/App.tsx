@@ -5,6 +5,7 @@ import './App.css';
 
 import { createMuiTheme } from '@material-ui/core';
 import Main from './components/Main';
+import Home from './components/Home';
 
 function App() {
 
@@ -16,19 +17,16 @@ function App() {
       // Name of the component ⚛️
       MuiButtonBase: {
         // The properties to apply
-        disableRipple: true, // No more ripple, on the whole application 💣!
+        disableRipple: true, // No more ripple, on the whole application!
       },
     },
   });
 
   return (
     <MuiThemeProvider theme={theme}>
-      <Main />
-      {/* <div>
-        <Button variant="contained" color="primary">
-          Primary
-        </Button>
-      </div> */}
+      <Main>
+        <Home />
+      </Main>
     </MuiThemeProvider>
     ); 
 }
