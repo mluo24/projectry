@@ -64,7 +64,8 @@ const SideDrawer = ({title, links} : Props) => {
 
     return (
         <>
-        <IconButton edge="start" color="inherit" aria-label="menu" onClick={toggleDrawer("right", true)}>
+        {/* {onClick={toggleDrawer("right", true)}} */}
+        <IconButton edge="start" color="inherit" aria-label="menu">
             <MenuIcon />
         </IconButton>
         </>
