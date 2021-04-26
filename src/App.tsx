@@ -2,7 +2,6 @@ import React from 'react';
 // import logo from './logo.svg';
 import { MuiThemeProvider } from '@material-ui/core';
 import './App.css';
-
 import { createMuiTheme } from '@material-ui/core';
 import Main from './components/Main';
 import Home from './components/Home';
@@ -28,7 +27,7 @@ function App() {
         <Home />
       </Main>
     </MuiThemeProvider>
-    ); 
+  );
 }
 
 export default App;
