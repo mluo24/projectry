@@ -6,20 +6,20 @@ const useStyles = makeStyles((theme: Theme) =>
     createStyles({
     }),
 );
-    
+
 type category = {
-    name : string,
-    description : string
+    name: string,
+    description: string
 }
 
 const CategoryCards = () => {
 
-    const categoryCardList : category[] = [
+    const categoryCardList: category[] = [
     ];
 
     return (
         <div>
-            {categoryCardList.map(({name, description}, index) => (
+            {categoryCardList.map(({ name, description }, index) => (
                 <Card>
                     <CardContent key={name}>
                         {name}
@@ -42,7 +42,7 @@ const Home = () => {
             </Container>
         </Box>
     );
-    
+
 }
 
 export default Home;

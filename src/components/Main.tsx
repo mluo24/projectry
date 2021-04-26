@@ -6,18 +6,20 @@ type Props = { readonly children: ReactNode }
 const Main = (props: Props) => {
 
     const links = [
-        {title : "Categories", path : "/"},
-        {title : "Projects", path : "/projects"},
-        {title : "About", path : "/about"}
+        { title: "Categories", path: "/" },
+        { title: "Projects", path: "/projects" },
+        { title: "About", path: "/about" },
+        { title: "Log In", path: "/login" },
+        { title: "Sign Up", path: "/signup" }
     ];
 
     return (
         <div>
-            <Header title="Projectry" links={links}/>
+            <Header title="Projectry" links={links} />
             {props.children}
         </div>
     );
-    
+
 }
 
 export default Main;

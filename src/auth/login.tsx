@@ -16,7 +16,7 @@ const Login: React.FC = () => {
           <div />
           <div style={{ display: 'flex', flexDirection: 'column', maxWidth: 400, minWidth: 300 }}>
             <Grid container justify="center">
-              <img src=""  // maybe a progectry logo?
+              <img src=""  // maybe add a progectry logo?
                 width={200}
                 alt="logo"
               />
