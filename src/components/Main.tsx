@@ -1,3 +1,4 @@
+import { Box } from '@material-ui/core';
 import React, { ReactNode } from 'react';
 import Header from './Header';
 
@@ -16,7 +17,9 @@ const Main = (props: Props) => {
     return (
         <div>
             <Header title="Projectry" links={links} />
-            {props.children}
+            <Box m={5}>
+                {props.children}
+            </Box>
         </div>
     );
 

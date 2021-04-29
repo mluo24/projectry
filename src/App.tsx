@@ -7,6 +7,7 @@ import './App.css';
 import Main from './components/Main';
 import Home from './components/Home';
 import Login from './auth/login';
+import Register from './auth/register';
 
 
 function App() {
@@ -16,7 +17,7 @@ function App() {
    */
   const theme = createMuiTheme({
     props: {
-      // Name of the component ⚛️
+      // Name of the component
       MuiButtonBase: {
         // The properties to apply
         disableRipple: true, // No more ripple, on the whole application!
@@ -25,22 +26,29 @@ function App() {
   });
 
   return (
-    <Router>
-      <div className="app">
-        <Switch>
-          <Route path="/login">
-            <Login />
-          </Route>
-          <Route path="/">
-            <MuiThemeProvider theme={theme}>
+    <MuiThemeProvider theme={theme}>
+      <Router>
+        {/* <div className="app"> */}
+          <Switch>
+            <Route path="/login">
+              <Main>
+                <Login />
+              </Main>
+            </Route>
+            <Route path="/signup">
+              <Main>
+                <Register />
+              </Main>
+            </Route>
+            <Route path="/">
               <Main>
                 <Home />
               </Main>
-            </MuiThemeProvider>
-          </Route>
-        </Switch>
-      </div>
-    </Router>
+            </Route>
+          </Switch>
+        {/* </div> */}
+      </Router>
+    </MuiThemeProvider>
   );
 }
 
