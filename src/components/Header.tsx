@@ -48,6 +48,17 @@ type Props = {
 
 const SideDrawer = ({ title, links }: Props) => {
 
+    const [state, setState] = useState({ right: false }) // Add this
+    // const toggleDrawer = (anchor, open) => event : React.MouseEventHandler => {
+    //     if (
+    //     event.type === "keydown" &&
+    //     (event.key === "Tab" || event.key === "Shift")
+    //     ) {
+    //     return
+    //     }
+    //     setState({ [anchor]: open })
+    // }
+
     const classes = useStyles();
 
     // const [state, setState] = useState({ right: false }) // Add this
@@ -64,8 +75,9 @@ const SideDrawer = ({ title, links }: Props) => {
 
     return (
         <>
-            {/* {onClick={toggleDrawer("right", true)}} */}
-            <IconButton edge="start" color="inherit" aria-label="menu">
+            {/* onClick={toggleDrawer("right", true)}*/}
+            <IconButton className={classes.menuButton} edge="start" color="inherit" aria-label="menu"
+                >
                 <MenuIcon />
             </IconButton>
         </>
@@ -80,9 +92,6 @@ const Navbar = ({ title, links }: Props) => {
         <Toolbar className={classes.toolbarMain}>
             {/* removed appbar from the top*/}
             <Container maxWidth="md" className={classes.navbarDisplayFlex}>
-                <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-                    <MenuIcon />
-                </IconButton>
                 <Typography variant="h5" className={classes.title}>
                     <a href="/" className={classes.linkText}>{title}</a>
                 </Typography>
@@ -95,6 +104,7 @@ const Navbar = ({ title, links }: Props) => {
                         </a>
                     ))}
                 </List>
+                <SideDrawer title={title} links={links}/>
             </Container>
         </Toolbar>
     );
