@@ -1,4 +1,4 @@
-import { AppBar, Toolbar, List, ListItem, ListItemText, IconButton, Typography, Container } from '@material-ui/core';
+import { AppBar, Toolbar, List, ListItem, ListItemText, IconButton, Typography, Container, Link } from '@material-ui/core';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import MenuIcon from '@material-ui/icons/Menu';
 import React, { useState } from 'react';
@@ -40,11 +40,17 @@ const useStyles = makeStyles((theme: Theme) =>
 
 type link = { title: string, path: string };
 
-type Props = {
-    readonly title: string
-    readonly links: link[]
-};
+type category = {
+    name: string,
+    description: string,
+    slug: string
+}
 
+type Props = {
+    readonly title: string,
+    readonly links: link[],
+    readonly categories: category[]
+};
 
 const SideDrawer = ({ title, links }: Props) => {
 
@@ -77,14 +83,14 @@ const SideDrawer = ({ title, links }: Props) => {
         <>
             {/* onClick={toggleDrawer("right", true)}*/}
             <IconButton className={classes.menuButton} edge="start" color="inherit" aria-label="menu"
-                >
+            >
                 <MenuIcon />
             </IconButton>
         </>
     );
 }
 
-const Navbar = ({ title, links }: Props) => {
+const Navbar = ({ title, links, categories }: Props) => {
 
     const classes = useStyles();
 
@@ -104,24 +110,24 @@ const Navbar = ({ title, links }: Props) => {
                         </a>
                     ))}
                 </List>
-                <SideDrawer title={title} links={links}/>
+                <SideDrawer title={title} links={links} categories={categories} />
             </Container>
         </Toolbar>
     );
 }
 
-const Categories = () => {
+const Categories = ({ categories }: Props) => {
 
     const classes = useStyles();
 
-    const categoryList: string[] = ["Category 1", "Category 2", "Category 3", "Category 4"];
+    // const categoryList: string[] = ["Category 1", "Category 2", "Category 3", "Category 4"];
 
     return (
         <Container maxWidth="md">
             <Toolbar variant="dense" className={classes.toolbarSecondary}>
-                {categoryList.map(c => (
-                    <Typography color="inherit" noWrap key={c}>
-                        {c}
+                {categories.map(({ name, slug }, index) => (
+                    <Typography color="inherit" noWrap key={index}>
+                        <Link href={slug}>{name}</Link>
                     </Typography>
                 ))}
             </Toolbar>
@@ -129,11 +135,11 @@ const Categories = () => {
     );
 }
 
-const Header = ({ title, links }: Props) => {
+const Header = ({ title, links, categories }: Props) => {
     return (
         <>
-            <Navbar title={title} links={links} />
-            <Categories />
+            <Navbar title={title} links={links} categories={categories} />
+            <Categories title={title} links={links} categories={categories} />
         </>
     );
 }
