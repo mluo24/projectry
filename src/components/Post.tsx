@@ -3,26 +3,26 @@ import React from 'react';
 import { category } from './Header';
 import { user } from './User';
 
-export type project = {
-    id : number,
-    title : string,
-    user : user,
-    description : string,
-    category : category,
-    timeCommitment : string,
-    teamSize : number,
-    toolsUsed : string,
-    paid : boolean,
-    fulfilled : boolean,
-    dateCreated : string
+export type post = {
+    id: number,
+    title: string,
+    user: user,
+    description: string,
+    category: category,
+    timeCommitment: string,
+    teamSize: number,
+    toolsUsed: string,
+    paid: boolean,
+    fulfilled: boolean,
+    dateCreated: string
 }
 
 
 type Props = {
-    p : project
+    p: post
 }
 
-const Post = ({p} : Props) => {
+const Post = ({ p }: Props) => {
 
     return (
         <Container maxWidth="md">

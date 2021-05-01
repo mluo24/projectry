@@ -8,7 +8,7 @@ import Main from './components/Main';
 import Home from './components/Home';
 import Login from './auth/login';
 import Register from './auth/register';
-import Post, { project } from './components/Post';
+import Post, { post } from './components/Post';
 import User from './components/User';
 import Projects from './components/Projects';
 
@@ -28,7 +28,7 @@ function App() {
     },
   });
 
-  const postExample: project = {
+  const postExample: post = {
     id: 1,
     title: "Example Project ",
     user: {

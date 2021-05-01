@@ -1,5 +1,5 @@
 import { Toolbar, List, ListItem, ListItemText, IconButton, Typography, Container, Link, Hidden, Drawer } from '@material-ui/core';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import { createStyles, fade, makeStyles, Theme } from '@material-ui/core/styles';
 import MenuIcon from '@material-ui/icons/Menu';
 import React, { DetailedHTMLProps, HTMLAttributes, MouseEventHandler, useState } from 'react';
 import { AccountBox } from '@material-ui/icons';
@@ -38,6 +38,43 @@ const useStyles = makeStyles((theme: Theme) =>
         },
         list: {
             width: 250
+        },
+        search: {
+            position: 'relative',
+            borderRadius: theme.shape.borderRadius,
+            backgroundColor: fade(theme.palette.common.white, 0.15),
+            '&:hover': {
+                backgroundColor: fade(theme.palette.common.white, 0.25),
+            },
+            marginRight: theme.spacing(2),
+            marginLeft: 0,
+            width: '100%',
+            [theme.breakpoints.up('sm')]: {
+                marginLeft: theme.spacing(3),
+                width: 'auto',
+            },
+        },
+        searchIcon: {
+            padding: theme.spacing(0, 2),
+            height: '100%',
+            position: 'absolute',
+            pointerEvents: 'none',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+        },
+        inputRoot: {
+            color: 'inherit',
+        },
+        inputInput: {
+            padding: theme.spacing(1, 1, 1, 0),
+            // vertical padding + font size from searchIcon
+            paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
+            transition: theme.transitions.create('width'),
+            width: '100%',
+            [theme.breakpoints.up('md')]: {
+                width: '20ch',
+            },
         },
     }),
 );
@@ -103,6 +140,7 @@ const Navbar = ({ title, links, categories }: Props) => {
 
     const classes = useStyles();
 
+
     return (
         <Toolbar className={classes.toolbarMain}>
             {/* removed appbar from the top*/}
@@ -120,6 +158,9 @@ const Navbar = ({ title, links, categories }: Props) => {
                             </a>
                         ))}
                     </List>
+                    <IconButton edge="start" color="inherit">
+                        <AccountBox />
+                    </IconButton>
                 </Hidden>
                 <Hidden mdUp>
                     <SideDrawer title={title} links={links} categories={categories} />
