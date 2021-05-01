@@ -1,4 +1,4 @@
-import { Card, CardContent, CardMedia, Container, Grid, Hidden, Paper, Typography } from '@material-ui/core';
+import { Card, CardContent, CardMedia, Container, Grid, Hidden, Link, Paper, Typography } from '@material-ui/core';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import React from 'react';
 
@@ -66,7 +66,7 @@ const CategoryCards = () => {
                   {description}
                 </Typography>
                 <Typography variant="subtitle2" color="primary">
-                  Continue reading...
+                  <Link href={slug}>See projects &rarr;</Link>
                 </Typography>
               </CardContent>
             </div>

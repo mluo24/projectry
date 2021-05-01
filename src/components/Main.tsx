@@ -9,7 +9,6 @@ type Props = { readonly children: ReactNode }
 const Main = (props: Props) => {
 
     const links = [
-        { title: "Categories", path: "/" },
         { title: "Projects", path: "/projects" },
         { title: "About", path: "/about" },
         { title: "Log In", path: "/login" },
@@ -19,31 +18,37 @@ const Main = (props: Props) => {
 
     const categoryCardList = [
         {
+            id : 1,
             name: "Design",
             description: "laskdjflas",
             slug: "/design"
         },
         {
+            id : 2,
             name: "Art",
             description: "laskdjflas",
             slug: "/art"
         },
         {
+            id : 3,
             name: "Video",
             description: "laskdjflas",
             slug: "/video"
         },
         {
+            id : 4,
             name: "Music",
             description: "laskdjflas",
             slug: "/music"
         },
         {
+            id : 5,
             name: "Tech",
             description: "laskdjflas",
             slug: "/tech"
         },
         {
+            id : 6,
             name: "Other",
             description: "laskdjflas",
             slug: "/other"

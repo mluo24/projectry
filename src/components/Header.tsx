@@ -38,9 +38,10 @@ const useStyles = makeStyles((theme: Theme) =>
     }),
 );
 
-type link = { title: string, path: string };
+export type link = { title: string, path: string };
 
-type category = {
+export type category = {
+    id : number,
     name: string,
     description: string,
     slug: string
@@ -127,7 +128,7 @@ const Categories = ({ categories }: Props) => {
             <Toolbar variant="dense" className={classes.toolbarSecondary}>
                 {categories.map(({ name, slug }, index) => (
                     <Typography color="inherit" noWrap key={index}>
-                        <Link href={slug}>{name}</Link>
+                        <Link href={slug} className={classes.linkText} underline="none">{name}</Link>
                     </Typography>
                 ))}
             </Toolbar>
