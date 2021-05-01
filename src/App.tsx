@@ -9,6 +9,8 @@ import Home from './components/Home';
 import Login from './auth/login';
 import Register from './auth/register';
 import Post, { project } from './components/Post';
+import User from './components/User';
+import Projects from './components/Projects';
 
 
 function App() {
@@ -26,60 +28,70 @@ function App() {
     },
   });
 
-  const postExample : project = {
-    id : 1,
-    title : "Example Project ",
-    user : {
-      id : 1,
-      firstName : "John",
-      lastName : "Doe",
-      password : "",
-      interest : "Tech",
-      skills : "none",
-      linkedInURL : "https://linkedin.com",
-      dateAccountMade : (new Date()).toString()
+  const postExample: project = {
+    id: 1,
+    title: "Example Project ",
+    user: {
+      id: 1,
+      firstName: "John",
+      lastName: "Doe",
+      password: "",
+      interest: "Tech",
+      skills: "none",
+      linkedInURL: "https://linkedin.com",
+      dateAccountMade: (new Date()).toString()
     },
-    description : "This is an example project.",
-    category : {
-      id : 1,
+    description: "This is an example project.",
+    category: {
+      id: 1,
       name: "Design",
       description: "laskdjflas",
       slug: "/design"
     },
-    timeCommitment : "2 months",
-    teamSize : 5,
-    toolsUsed : "React, Node.js",
-    paid : false,
-    fulfilled : false,
-    dateCreated : (new Date()).toString()
+    timeCommitment: "2 months",
+    teamSize: 5,
+    toolsUsed: "React, Node.js",
+    paid: false,
+    fulfilled: false,
+    dateCreated: (new Date()).toString()
   }
 
   return (
     <MuiThemeProvider theme={theme}>
       <Router>
         {/* <div className="app"> */}
-          <Switch>
-            <Route path="/login">
-              <Main>
-                <Login />
-              </Main>
-            </Route>
-            <Route path="/signup">
-              <Main>
-                <Register />
-              </Main>
-            </Route>
-            <Route path="/example-post">
-              <Main>
-                <Post p={postExample}/>
-              </Main>
-            </Route>
-            <Route path="/">
-              <Main>
-                <Home />
-              </Main>
-            </Route>
-          </Switch>
+        <Switch>
+          <Route path="/login">
+            <Main>
+              <Login />
+            </Main>
+          </Route>
+          <Route path="/signup">
+            <Main>
+              <Register />
+            </Main>
+          </Route>
+          <Route path="/example-post">
+            <Main>
+              <Post p={postExample} />
+            </Main>
+          </Route>
+          <Route path="/profile">
+            <Main>
+              <User />
+            </Main>
+          </Route>
+          <Route path="/projects">
+            <Main>
+              <Projects />
+            </Main>
+          </Route>
+          <Route path="/">
+            <Main>
+              <Home />
+            </Main>
+          </Route>
+        </Switch>
         {/* </div> */}
       </Router>
     </MuiThemeProvider>

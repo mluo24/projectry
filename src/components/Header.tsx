@@ -2,6 +2,7 @@ import { Toolbar, List, ListItem, ListItemText, IconButton, Typography, Containe
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import MenuIcon from '@material-ui/icons/Menu';
 import React, { DetailedHTMLProps, HTMLAttributes, MouseEventHandler, useState } from 'react';
+import { AccountBox } from '@material-ui/icons';
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -37,14 +38,14 @@ const useStyles = makeStyles((theme: Theme) =>
         },
         list: {
             width: 250
-          },
+        },
     }),
 );
 
 export type link = { title: string, path: string };
 
 export type category = {
-    id : number,
+    id: number,
     name: string,
     description: string,
     slug: string
@@ -62,23 +63,23 @@ const SideDrawer = ({ title, links }: Props) => {
 
     const [state, setState] = useState({ right: false });
 
-    const toggleDrawer = (anchor : string, open : boolean) => (event : any) => {
+    const toggleDrawer = (anchor: string, open: boolean) => (event: any) => {
         setState({ right: open });
     }
 
-    const sideDrawerList = (anchor : string) => (
+    const sideDrawerList = (anchor: string) => (
         <div
             className={classes.list}
             role="presentation"
             onClick={toggleDrawer(anchor, false)}
-            >
+        >
             <List component="nav">
                 {links.map(({ title, path }) => (
-                <a href={path} key={title} className={classes.linkText}>
-                    <ListItem button>
-                    <ListItemText primary={title} />
-                    </ListItem>
-                </a>
+                    <a href={path} key={title} className={classes.linkText}>
+                        <ListItem button>
+                            <ListItemText primary={title} />
+                        </ListItem>
+                    </a>
                 ))}
             </List>
         </div>
@@ -153,6 +154,7 @@ const Header = ({ title, links, categories }: Props) => {
             <Navbar title={title} links={links} categories={categories} />
             <Categories title={title} links={links} categories={categories} />
         </>
+
     );
 }
 
