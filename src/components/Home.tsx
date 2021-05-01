@@ -1,4 +1,4 @@
-import { Card, CardContent, CardMedia, Container, Grid, Hidden, Link, Paper, Typography } from '@material-ui/core';
+import { Card, CardContent, CardMedia, Container, Grid, Hidden, Link, Typography } from '@material-ui/core';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import React from 'react';
 
@@ -13,6 +13,10 @@ const useStyles = makeStyles((theme: Theme) =>
     cardMedia: {
       width: 160
     },
+    spacingAdjustment: {
+        marginTop: theme.spacing(1),
+        marginBottom: theme.spacing(1),
+    }
   }),
 );
 
@@ -20,32 +24,32 @@ const useStyles = makeStyles((theme: Theme) =>
 const categoryCardList = [
   {
     name: "Design",
-    description: "laskdjflas",
+    description: "Description placeholder",
     slug: "/design"
   },
   {
     name: "Art",
-    description: "laskdjflas",
+    description: "Description placeholder",
     slug: "/art"
   },
   {
     name: "Video",
-    description: "laskdjflas",
+    description: "Description placeholder",
     slug: "/video"
   },
   {
     name: "Music",
-    description: "laskdjflas",
+    description: "Description placeholder",
     slug: "/music"
   },
   {
     name: "Tech",
-    description: "laskdjflas",
+    description: "Description placeholder",
     slug: "/tech"
   },
   {
     name: "Other",
-    description: "laskdjflas",
+    description: "Description placeholder",
     slug: "/other"
   }
 ];
@@ -55,7 +59,7 @@ const CategoryCards = () => {
   const classes = useStyles();
 
   return (
-    <Grid container spacing={4}>
+    <Grid container spacing={4} className={classes.spacingAdjustment}>
       {categoryCardList.map(({ name, description, slug }, index) => (
         <Grid item key={index} xs={12} md={6}>
           <Card className={classes.card}>
@@ -86,14 +90,16 @@ const CategoryCards = () => {
 
 const Home = () => {
 
+    const classes = useStyles();
+
   return (
     <Container maxWidth="md">
       <Typography component="h1" variant="h3" align="center">
         Welcome to Projectry!
-            </Typography>
-      <Typography component="h2" variant="h5">
+        </Typography>
+      <Typography component="h2" variant="h5" className={classes.spacingAdjustment}>
         Start exploring through some categories!
-            </Typography>
+        </Typography>
       <CategoryCards />
     </Container>
   );

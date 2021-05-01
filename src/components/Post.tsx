@@ -50,7 +50,7 @@ const Post = ({p} : Props) => {
                         </ListItem>
                         <ListItem>
                             <ListItemText>
-                                Team Size: {p.teamSize} {p.teamSize == 1 ? "person" : "people"}
+                                Team Size: {p.teamSize} {p.teamSize === 1 ? "person" : "people"}
                             </ListItemText>
                         </ListItem>
                         <ListItem>

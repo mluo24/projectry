@@ -1,7 +1,7 @@
-import { AppBar, Toolbar, List, ListItem, ListItemText, IconButton, Typography, Container, Link } from '@material-ui/core';
+import { Toolbar, List, ListItem, ListItemText, IconButton, Typography, Container, Link, Hidden, Drawer } from '@material-ui/core';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import MenuIcon from '@material-ui/icons/Menu';
-import React, { useState } from 'react';
+import React, { DetailedHTMLProps, HTMLAttributes, MouseEventHandler, useState } from 'react';
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -35,6 +35,9 @@ const useStyles = makeStyles((theme: Theme) =>
         toolbarMain: {
             borderBottom: `1px solid ${theme.palette.grey[300]}`
         },
+        list: {
+            width: 250
+          },
     }),
 );
 
@@ -55,38 +58,42 @@ type Props = {
 
 const SideDrawer = ({ title, links }: Props) => {
 
-    const [state, setState] = useState({ right: false }) // Add this
-    // const toggleDrawer = (anchor, open) => event : React.MouseEventHandler => {
-    //     if (
-    //     event.type === "keydown" &&
-    //     (event.key === "Tab" || event.key === "Shift")
-    //     ) {
-    //     return
-    //     }
-    //     setState({ [anchor]: open })
-    // }
-
     const classes = useStyles();
 
-    // const [state, setState] = useState({ right: false }) // Add this
-    // const toggleDrawer = (anchor: string, open: boolean) => (event : MouseEvent<HTMLButtonElement>) => {
-    //     if (
-    //     event.type === "keydown" &&
-    //     (event.key === "Tab" || event.key === "Shift")
-    //     ) {
-    //     return
-    //     }
-    //     setState({ [anchor]: open })
-    // }
+    const [state, setState] = useState({ right: false });
 
+    const toggleDrawer = (anchor : string, open : boolean) => (event : any) => {
+        setState({ right: open });
+    }
+
+    const sideDrawerList = (anchor : string) => (
+        <div
+            className={classes.list}
+            role="presentation"
+            onClick={toggleDrawer(anchor, false)}
+            >
+            <List component="nav">
+                {links.map(({ title, path }) => (
+                <a href={path} key={title} className={classes.linkText}>
+                    <ListItem button>
+                    <ListItemText primary={title} />
+                    </ListItem>
+                </a>
+                ))}
+            </List>
+        </div>
+    );
 
     return (
         <>
             {/* onClick={toggleDrawer("right", true)}*/}
-            <IconButton className={classes.menuButton} edge="start" color="inherit" aria-label="menu"
-            >
+            <IconButton edge="start" color="inherit" aria-label="menu" onClick={toggleDrawer("right", true)}>
                 <MenuIcon />
             </IconButton>
+
+            <Drawer anchor="right" open={state.right} onClose={toggleDrawer("right", false)}>
+                {sideDrawerList("right")}
+            </Drawer>
         </>
     );
 }
@@ -102,16 +109,20 @@ const Navbar = ({ title, links, categories }: Props) => {
                 <Typography variant="h5" className={classes.title}>
                     <a href="/" className={classes.linkText}>{title}</a>
                 </Typography>
-                <List component="nav" aria-labelledby="main navigation" className={classes.navDisplayFlex}>
-                    {links.map(({ title, path }) => (
-                        <a href={path} key={title} className={classes.linkText}>
-                            <ListItem button>
-                                <ListItemText primary={title} />
-                            </ListItem>
-                        </a>
-                    ))}
-                </List>
-                <SideDrawer title={title} links={links} categories={categories} />
+                <Hidden smDown>
+                    <List component="nav" aria-labelledby="main navigation" className={classes.navDisplayFlex}>
+                        {links.map(({ title, path }) => (
+                            <a href={path} key={title} className={classes.linkText}>
+                                <ListItem button>
+                                    <ListItemText primary={title} />
+                                </ListItem>
+                            </a>
+                        ))}
+                    </List>
+                </Hidden>
+                <Hidden mdUp>
+                    <SideDrawer title={title} links={links} categories={categories} />
+                </Hidden>
             </Container>
         </Toolbar>
     );
