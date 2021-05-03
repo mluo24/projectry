@@ -32,7 +32,7 @@ const Main = (props: Props) => {
         { title: "Projects", path: "/projects" },
         { title: "Log In", path: "/login" },
         { title: "Sign Up", path: "/signup" },
-        //{ title: "Profile", path: "/profile" },
+        { title: "Profile", path: "/profile" },
         { title: "Message", path: "/message" }
     ];
 

@@ -3,6 +3,10 @@ import { createStyles, fade, makeStyles, Theme } from '@material-ui/core/styles'
 import MenuIcon from '@material-ui/icons/Menu';
 import React, { DetailedHTMLProps, HTMLAttributes, MouseEventHandler, useState } from 'react';
 import { AccountBox } from '@material-ui/icons';
+import { useHistory } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { RootState } from '../store/index';
+import { signout } from '../store/authActions';
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -140,6 +144,16 @@ const Navbar = ({ title, links, categories }: Props) => {
 
     const classes = useStyles();
 
+    // const history = useHistory();
+    // const dispatch = useDispatch();
+    // const { authenticated } = useSelector((state: RootState) => state.auth);
+
+    // const logoutClickHandler = () => {
+    //     dispatch(signout());
+    // }
+
+
+
 
     return (
         <Toolbar className={classes.toolbarMain}>
@@ -158,9 +172,9 @@ const Navbar = ({ title, links, categories }: Props) => {
                             </a>
                         ))}
                     </List>
-                    <IconButton edge="start" color="inherit">
+                    {/* <IconButton edge="start" color="inherit">
                         <AccountBox />
-                    </IconButton>
+                    </IconButton> */}
                 </Hidden>
                 <Hidden mdUp>
                     <SideDrawer title={title} links={links} categories={categories} />
