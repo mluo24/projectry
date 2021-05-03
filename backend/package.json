@@ -2,12 +2,12 @@
   "name": "backend",
   "version": "1.0.0",
   "description": "backend for Projectry",
-  "main": "index.ts",
+  "main": "index.js",
   "repository": "https://github.com/taerimeom/projectry",
   "author": "Taerim Eom & Miranda Luo",
   "license": "MIT",
   "scripts": {
-    "tsc": "tsc - p tsconfig.json",
+    "tsc": "tsc -p tsconfig.json",
     "start": "yarn tsc && node output/index"
   },
   "dependencies": {
