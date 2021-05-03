@@ -8,7 +8,7 @@ import Main from './components/Main';
 import Home from './components/Home';
 import Login from './auth/login';
 import Register from './auth/register';
-import Post, { post } from './components/Post';
+import Post, { project } from './components/Post';
 import User from './components/User';
 import Projects from './components/Projects';
 
@@ -28,7 +28,7 @@ function App() {
     },
   });
 
-  const postExample: post = {
+  const postExample: project = {
     id: 1,
     title: "Example Project ",
     user: {
@@ -55,6 +55,37 @@ function App() {
     fulfilled: false,
     dateCreated: (new Date()).toString()
   }
+
+  const projectsList : project[] = [
+    postExample,
+    {
+      id: 2,
+      title: "iOS App Dev",
+    user: {
+      id: 1,
+      firstName: "John",
+      lastName: "Doe",
+      password: "",
+      interest: "Tech",
+      skills: "none",
+      linkedInURL: "https://linkedin.com",
+      dateAccountMade: (new Date()).toString()
+    },
+    description: "Social media app for college students. Looking for technical and marketing team members.",
+    category: {
+      id: 1,
+      name: "Design",
+      description: "laskdjflas",
+      slug: "/design"
+    },
+    timeCommitment: "2 months",
+    teamSize: 5,
+    toolsUsed: "React, Node.js",
+    paid: false,
+    fulfilled: false,
+    dateCreated: (new Date()).toString()
+    }
+  ]
 
   return (
     <MuiThemeProvider theme={theme}>
@@ -83,7 +114,7 @@ function App() {
           </Route>
           <Route path="/projects">
             <Main>
-              <Projects />
+              <Projects projects={projectsList}/>
             </Main>
           </Route>
           <Route path="/">

@@ -3,7 +3,7 @@ import React from 'react';
 import { category } from './Header';
 import { user } from './User';
 
-export type post = {
+export type project = {
     id: number,
     title: string,
     user: user,
@@ -19,7 +19,7 @@ export type post = {
 
 
 type Props = {
-    p: post
+    p: project
 }
 
 const Post = ({ p }: Props) => {
