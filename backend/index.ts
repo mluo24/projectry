@@ -8,50 +8,98 @@ admin.initializeApp({
 });
 
 const db = admin.firestore();
-
 const app = express();
 const port = 8080;
 app.use(express.json());
 
-// type Song = {
-//   name: string;
-//   artist: string;
-//   rating: number
-// };
+// declaring types
+type Project = {
+  title: string,
+  uid: string,
+  description: string,
+  catid: string,
+  timeCommitment: string,
+  teamSize: number,
+  toolsUsed: string[],
+  paid: boolean,
+  fulfilled: boolean,
+  dateCreated: string
+}
 
-// type SongWithID = Song & {
-// id: string;
-// };
+type ProjectWithID = Project & {
+  id : string
+}
 
-// const songsCollection = db.collection('songs');
+type Category = {
+  name: string,
+  description: string,
+  slug: string
+}
+
+type CategoryWithID = Category & {
+  id : string
+}
+
+// dbs
+const usersCollection = db.collection('users');
+const projectsCollection = db.collection('projects');
+const categoriesCollection = db.collection('categories');
 
 // check connections
 app.get('/', (_, res) => {
   res.send('connected!');
 });
 
-app.get('/getAllProjects', async (_,res) => {
-  // const songsSnapshot = await songsCollection.get();
-  // const allSongsDoc = songsSnapshot.docs;
-  // const songs: SongWithID[] = [];
-  // for (let doc of allSongsDoc) {
-  //     const song: SongWithID = doc.data() as SongWithID;
-  //     song.id = doc.id;
-  //     songs.push(song);
-  // }
-  // res.send(songs);
+// endpoints
+app.get('/getAllProjects', async (_, res) => {
+  const projectsSnapshot = await projectsCollection.orderBy('dateCreated', 'asc').get();
+  const allProjectsDoc = projectsSnapshot.docs;
+  const projects : ProjectWithID[] = [];
+  for (let doc of allProjectsDoc) {
+    const project : ProjectWithID = doc.data() as ProjectWithID;
+    project.id = doc.id;
+    projects.push(project);
+  }
+  res.send(projects);
 });
 
-// make a new song
+app.get('/getCategories', async (_, res) => {
+  const categoriesSnapshot = await categoriesCollection.get();
+  const allCategoriesDoc = categoriesSnapshot.docs;
+  const categories : CategoryWithID[] = [];
+  for (let doc of allCategoriesDoc) {
+    const category : CategoryWithID = doc.data() as CategoryWithID;
+    category.id = doc.id;
+    categories.push(category);
+  }
+  res.send(categories);
+});
+
+app.get('/getProjectsByCategory/:id', async (req, res) => {
+  const catid = req.params.id;
+  const projectsSnapshot = await projectsCollection.where("catid", "==", catid).orderBy('dateCreated', 'asc').get();
+  const projectsDoc = projectsSnapshot.docs;
+  const projects : ProjectWithID[] = [];
+  for (let doc of projectsDoc) {
+    const project : ProjectWithID = doc.data() as ProjectWithID;
+    project.id = doc.id;
+    projects.push(project);
+  }
+});
+
+// make a new project
 app.post('/createProject', async (req, res) => {
-  // const song : Song  = req.body;
-  // const songDoc = songsCollection.doc();
-  // await songDoc.set(song);
-  // res.send(songDoc.id)
+  const project : Project  = req.body;
+  const projectDoc = projectsCollection.doc();
+  await projectDoc.set(project);
+  res.send(projectDoc.id)
 });
 
-// update song's rating
-app.post('/updateProject', async (req, res) => {
+app.post('/updateProject/:id', async (req, res) => {
+  const updatedProject : Project = req.body;
+  const id : string = req.params.id;
+  await projectsCollection.doc(id).update(updatedProject);
+  res.send(updatedProject);
   // // create without the ID
   // const {id, ...updatedRating} = req.body;
   // const songID : string = req.body.id;
@@ -60,12 +108,13 @@ app.post('/updateProject', async (req, res) => {
 });
 
 // delete song
-app.delete('/deleteProject', async (req, res) => {
-  // const id = req.query.id;
-  // await songsCollection.doc(id).delete();
+app.delete('/deleteProject/:id', async (req, res) => {
+  const id = req.params.id;
+  await projectsCollection.doc(id).delete();
+  res.send(id)
 });
 
-app.get('/getUser', async (_,res) => {
+app.get('/getUserInfo/:id', async (req, res) => {
   
 });
 
@@ -73,11 +122,11 @@ app.post('/createRating', async (req, res) => {
   
 });
 
-app.post('/updateRating', async (req, res) => {
+app.post('/updateRating/:id', async (req, res) => {
   
 });
 
-app.delete('/deleteRating', async (req, res) => {
+app.delete('/deleteRating/:id', async (req, res) => {
   
 });
 

@@ -22,39 +22,60 @@ const db = firebase_admin_1.default.firestore();
 const app = express_1.default();
 const port = 8080;
 app.use(express_1.default.json());
-// type Song = {
-//   name: string;
-//   artist: string;
-//   rating: number
-// };
-// type SongWithID = Song & {
-// id: string;
-// };
-// const songsCollection = db.collection('songs');
+// dbs
+const usersCollection = db.collection('users');
+const projectsCollection = db.collection('projects');
+const categoriesCollection = db.collection('categories');
 // check connections
 app.get('/', (_, res) => {
     res.send('connected!');
 });
+// endpoints
 app.get('/getAllProjects', (_, res) => __awaiter(void 0, void 0, void 0, function* () {
-    // const songsSnapshot = await songsCollection.get();
-    // const allSongsDoc = songsSnapshot.docs;
-    // const songs: SongWithID[] = [];
-    // for (let doc of allSongsDoc) {
-    //     const song: SongWithID = doc.data() as SongWithID;
-    //     song.id = doc.id;
-    //     songs.push(song);
-    // }
-    // res.send(songs);
+    const projectsSnapshot = yield projectsCollection.orderBy('dateCreated', 'asc').get();
+    const allProjectsDoc = projectsSnapshot.docs;
+    const projects = [];
+    for (let doc of allProjectsDoc) {
+        const project = doc.data();
+        project.id = doc.id;
+        projects.push(project);
+    }
+    res.send(projects);
 }));
-// make a new song
+app.get('/getCategories', (_, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const categoriesSnapshot = yield categoriesCollection.get();
+    const allCategoriesDoc = categoriesSnapshot.docs;
+    const categories = [];
+    for (let doc of allCategoriesDoc) {
+        const category = doc.data();
+        category.id = doc.id;
+        categories.push(category);
+    }
+    res.send(categories);
+}));
+app.get('/getProjectsByCategory/:id', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const catid = req.params.id;
+    const projectsSnapshot = yield projectsCollection.where("catid", "==", catid).orderBy('dateCreated', 'asc').get();
+    const projectsDoc = projectsSnapshot.docs;
+    const projects = [];
+    for (let doc of projectsDoc) {
+        const project = doc.data();
+        project.id = doc.id;
+        projects.push(project);
+    }
+}));
+// make a new project
 app.post('/createProject', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    // const song : Song  = req.body;
-    // const songDoc = songsCollection.doc();
-    // await songDoc.set(song);
-    // res.send(songDoc.id)
+    const project = req.body;
+    const projectDoc = projectsCollection.doc();
+    yield projectDoc.set(project);
+    res.send(projectDoc.id);
 }));
-// update song's rating
-app.post('/updateProject', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+app.post('/updateProject/:id', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const updatedProject = req.body;
+    const id = req.params.id;
+    yield projectsCollection.doc(id).update(updatedProject);
+    res.send(updatedProject);
     // // create without the ID
     // const {id, ...updatedRating} = req.body;
     // const songID : string = req.body.id;
@@ -62,16 +83,17 @@ app.post('/updateProject', (req, res) => __awaiter(void 0, void 0, void 0, funct
     // res.send('updated');
 }));
 // delete song
-app.delete('/deleteProject', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    // const id = req.query.id;
-    // await songsCollection.doc(id).delete();
+app.delete('/deleteProject/:id', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const id = req.params.id;
+    yield projectsCollection.doc(id).delete();
+    res.send(id);
 }));
-app.get('/getUser', (_, res) => __awaiter(void 0, void 0, void 0, function* () {
+app.get('/getUserInfo/:id', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
 }));
 app.post('/createRating', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
 }));
-app.post('/updateRating', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+app.post('/updateRating/:id', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
 }));
-app.delete('/deleteRating', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+app.delete('/deleteRating/:id', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
 }));
 app.listen(port, () => console.log(`listening on port ${port}!`));
