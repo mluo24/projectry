@@ -28,17 +28,14 @@ const Login: React.FC = () => {
           >
           <div style={{ display: 'flex', flexDirection: 'column'}}>
               <Typography component="h1" variant="h4" align="center">
-                Log in
+                Log In
               </Typography>
-              {/* <img src=""  // maybe add a progectry logo?
-                width={200}
-                alt="logo"
-              /> */}
               <form  className={classes.form} noValidate>
                 <TextField
                   label="Username"
                   margin="normal"
                   fullWidth
+                  required
                   InputProps={{ startAdornment: <InputAdornment position="start"><AccountCircle /></InputAdornment> }} />
                 <TextField label="Password" type="password" margin="normal" fullWidth
                   InputProps={{ startAdornment: <InputAdornment position="start"><LockRounded /></InputAdornment> }} />

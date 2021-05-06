@@ -1,12 +1,11 @@
-import { Toolbar, List, ListItem, ListItemText, IconButton, Typography, Container, Link, Hidden, Drawer } from '@material-ui/core';
+import { Toolbar, List, ListItem, ListItemText, IconButton, Typography, Container, Link, Hidden, Drawer, Button } from '@material-ui/core';
 import { createStyles, fade, makeStyles, Theme } from '@material-ui/core/styles';
 import MenuIcon from '@material-ui/icons/Menu';
 import React, { DetailedHTMLProps, HTMLAttributes, MouseEventHandler, useState } from 'react';
 import { AccountBox } from '@material-ui/icons';
 import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { RootState } from '../store/index';
-import { signout } from '../store/authActions';
+import firebase from 'firebase/app';
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -171,10 +170,12 @@ const Navbar = ({ title, links, categories }: Props) => {
                                 </ListItem>
                             </a>
                         ))}
+                        <ListItem button>
+                             <ListItemText primary="Sign Out" onClick={()=>firebase.auth().signOut()}/>
+                        </ListItem>
+                         {/* <Button onClick={()=>firebase.auth().signOut()}>Sign Out</Button> */}
+
                     </List>
-                    {/* <IconButton edge="start" color="inherit">
-                        <AccountBox />
-                    </IconButton> */}
                 </Hidden>
                 <Hidden mdUp>
                     <SideDrawer title={title} links={links} categories={categories} />
