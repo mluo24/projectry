@@ -19,11 +19,30 @@ app.use(express.json());
 //   rating: number
 // };
 
+type Project = {
+  title: string,
+  uid: string,
+  description: string,
+  catid: string,
+  timeCommitment: string,
+  teamSize: number,
+  toolsUsed: string[],
+  paid: boolean,
+  fulfilled: boolean,
+  dateCreated: string
+}
+
+type ProjectWithID = Project & {
+  id : string
+}
+
 // type SongWithID = Song & {
 // id: string;
 // };
 
 // const songsCollection = db.collection('songs');
+
+const users = db.collection('users');
 
 // check connections
 app.get('/', (_, res) => {
@@ -31,6 +50,33 @@ app.get('/', (_, res) => {
 });
 
 app.get('/getAllProjects', async (_,res) => {
+
+  // const songsSnapshot = await songsCollection.get();
+  // const allSongsDoc = songsSnapshot.docs;
+  // const songs: SongWithID[] = [];
+  // for (let doc of allSongsDoc) {
+  //     const song: SongWithID = doc.data() as SongWithID;
+  //     song.id = doc.id;
+  //     songs.push(song);
+  // }
+  // res.send(songs);
+});
+
+app.get('/getCategories', async (_,res) => {
+
+  // const songsSnapshot = await songsCollection.get();
+  // const allSongsDoc = songsSnapshot.docs;
+  // const songs: SongWithID[] = [];
+  // for (let doc of allSongsDoc) {
+  //     const song: SongWithID = doc.data() as SongWithID;
+  //     song.id = doc.id;
+  //     songs.push(song);
+  // }
+  // res.send(songs);
+});
+
+app.get('/getProjectByCategory', async (_,res) => {
+
   // const songsSnapshot = await songsCollection.get();
   // const allSongsDoc = songsSnapshot.docs;
   // const songs: SongWithID[] = [];
@@ -65,7 +111,7 @@ app.delete('/deleteProject', async (req, res) => {
   // await songsCollection.doc(id).delete();
 });
 
-app.get('/getUser', async (_,res) => {
+app.get('/getUserInfo', async (_,res) => {
   
 });
 
