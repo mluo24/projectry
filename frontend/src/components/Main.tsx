@@ -30,7 +30,7 @@ const Main = (props: Props) => {
 
     const links = [
         { title: "Projects", path: "/projects" },
-       // { title: "Log In", path: "/login" },
+        //{ title: "Log In", path: "/login" },
        // { title: "Sign Up", path: "/signup" },
         { title: "Profile", path: "/profile" },
         { title: "Message", path: "/message" }
