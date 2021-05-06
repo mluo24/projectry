@@ -1,8 +1,8 @@
-import React from 'react';
+import React, {FC, useEffect} from 'react';
 // import logo from './logo.svg';
 import { MuiThemeProvider } from '@material-ui/core';
 import { createMuiTheme } from '@material-ui/core';
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, BrowserRouter } from "react-router-dom";
 import './App.css';
 import Main from './components/Main';
 import Home from './components/Home';
@@ -11,9 +11,52 @@ import Register from './auth/register';
 import Post, { project } from './components/Post';
 import User from './components/User';
 import Projects from './components/Projects';
+import Authenticated from './auth/firebaseConfig';
+
+// import {useDispatch, useSelector} from 'react-redux';
+// import HeaderTemp from './temp/HeaderTemp';
+// import SignUpTemp from './temp/SignUpTemp';
+// import LogInTemp from './temp/LogInTemp';
+// import ForgotPassword from './temp/ForgotPassword';
+// import HomeTemp from './temp/HomeTemp';
+// import Dashboard from './temp/Dashboard';
+// import PrivateRoute from './auth/PrivateRoute';
+// import PublicRoute from './auth/PublicRoute';
+// import Loader from './temp/Loader';
+// import firebase from './auth/firebaseConfig';
+// import { getUserById, setLoading, setNeedVerification } from './store/authActions';
+// import { RootState } from './store';
+
+
 
 
 function App() {
+
+  // const dispatch = useDispatch();
+  // const { loading } = useSelector((state: RootState) => state.auth);
+  
+  // // check if user exists
+  // useEffect(() => {
+  //   dispatch(setLoading(true));
+  //   const unsubscribe = firebase.auth().onAuthStateChanged(async (user) => {
+  //     if(user) {
+  //       dispatch(setLoading(true));
+  //       await dispatch(getUserById(user.uid));
+  //       if(!user.emailVerified) {
+  //         dispatch(setNeedVerification());
+  //       }
+  //     }
+  //     dispatch(setLoading(false));
+  //   });
+
+  //   return () => {
+  //     unsubscribe();
+  //   }
+  // }, [dispatch]);
+
+  // if (loading) {
+  //   return <Loader />;
+  // }
 
   /**
    * Theme to disable ripple effect in MaterialUI button
@@ -87,44 +130,58 @@ function App() {
     }
   ]
 
+
+
   return (
+  //   <BrowserRouter>
+  //   <HeaderTemp/>
+  //     <Switch>
+  //       <PublicRoute path="/" component={HomeTemp} exact />
+  //       <PublicRoute path="/signup" component={SignUpTemp} exact />
+  //       <PublicRoute path="/login" component={LogInTemp} exact />
+  //       <PublicRoute path="/forgot-password" component={ForgotPassword} exact />
+  //       <PrivateRoute path="/dashboard" component={Dashboard} exact />
+  //     </Switch>
+  // </BrowserRouter>
     <MuiThemeProvider theme={theme}>
-      <Router>
-        {/* <div className="app"> */}
-        <Switch>
-          <Route path="/login">
-            <Main>
-              <Login />
-            </Main>
-          </Route>
-          <Route path="/signup">
-            <Main>
-              <Register />
-            </Main>
-          </Route>
-          <Route path="/example-post">
-            <Main>
-              <Post p={postExample} />
-            </Main>
-          </Route>
-          <Route path="/profile">
-            <Main>
-              <User />
-            </Main>
-          </Route>
-          <Route path="/projects">
-            <Main>
-              <Projects projects={projectsList}/>
-            </Main>
-          </Route>
-          <Route path="/">
-            <Main>
-              <Home />
-            </Main>
-          </Route>
-        </Switch>
-        {/* </div> */}
-      </Router>
+      <Authenticated>
+        <Router>
+          {/* <div className="app"> */}
+          <Switch>
+            <Route path="/login" component={Login} exact>
+              {/* <Main>
+                <Login />
+              </Main> */}
+            </Route>
+            <Route path="/signup">
+              <Main>
+                <Register />
+              </Main>
+            </Route>
+            <Route path="/example-post">
+              <Main>
+                <Post p={postExample} />
+              </Main>
+            </Route>
+            <Route path="/profile">
+              <Main>
+                <User />
+              </Main>
+            </Route>
+            <Route path="/projects">
+              <Main>
+                <Projects projects={projectsList}/>
+              </Main>
+            </Route>
+            <Route path="/">
+              <Main>
+                <Home />
+              </Main>
+            </Route>
+          </Switch>
+          {/* </div> */}
+        </Router>
+      </Authenticated>
     </MuiThemeProvider>
   );
 }

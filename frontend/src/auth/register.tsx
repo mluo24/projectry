@@ -11,15 +11,6 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import { Container } from '@material-ui/core';
 
-// import admin from 'firebase-admin';
-//import express from 'express';
-
-// const serviceAccount = require('../service-account.json');
-
-// // initialize firebase app
-// admin.initializeApp({
-//   credential: admin.credential.cert(serviceAccount)
-// });
 
 const useStyles = makeStyles((theme) => ({
   paper: {
