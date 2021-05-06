@@ -19,7 +19,7 @@ export type post = {
     category: category,
 }
 
-type ProjectCardProps = {
+export type ProjectCardProps = {
     readonly p : project
 }
 
@@ -51,7 +51,7 @@ const useStyles = makeStyles((theme: Theme) =>
     }),
 );
 
-const ProjectCard = ({p} : ProjectCardProps) => {
+export const ProjectCard = ({p} : ProjectCardProps) => {
 
     const classes = useStyles();
 
@@ -100,31 +100,6 @@ const Projects = ({projects} : ProjectsProps) => {
                     <ProjectCard p={project}/>
                 </Grid>
             ))}
-            {/* <Card className={classes.card}>
-                <CardActionArea>
-                    <CardMedia
-                        className={classes.cardMedia}
-                        image=""
-                        title="ios App Dev"
-                    />
-                    <CardContent>
-                        <Typography gutterBottom variant="h5" component="h2">
-                            iOS App Dev
-            </Typography>
-                        <Typography variant="body2" color="textSecondary" component="p">
-                            Social media app for college students.
-                            Looking for technical and marketing team members.
-            </Typography>
-                    </CardContent>
-                </CardActionArea>
-                <CardActions>
-
-                    <Button size="small" color="primary">
-                        Learn More
-            </Button>
-                </CardActions>
-
-            </Card> */}
         </Grid>
         </Container>
     );

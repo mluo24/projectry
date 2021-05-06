@@ -25,32 +25,32 @@ const categoryCardList = [
     {
         name: "Design",
         description: "Description placeholder",
-        slug: "/design"
+        slug: "/projects/design"
     },
     {
         name: "Art",
         description: "Description placeholder",
-        slug: "/art"
+        slug: "/projects/art"
     },
     {
         name: "Video",
         description: "Description placeholder",
-        slug: "/video"
+        slug: "/projects/video"
     },
     {
         name: "Music",
         description: "Description placeholder",
-        slug: "/music"
+        slug: "/projects/music"
     },
     {
         name: "Tech",
         description: "Description placeholder",
-        slug: "/tech"
+        slug: "/projects/tech"
     },
     {
         name: "Other",
         description: "Description placeholder",
-        slug: "/other"
+        slug: "/proejects/other"
     }
 ];
 

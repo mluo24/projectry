@@ -12,6 +12,8 @@ import Post, { project } from './components/Post';
 import User from './components/User';
 import Projects from './components/Projects';
 import Authenticated from './auth/firebaseConfig';
+import MusicProjects from './components/categories/Music';
+
 
 // import {useDispatch, useSelector} from 'react-redux';
 // import HeaderTemp from './temp/HeaderTemp';
@@ -86,7 +88,7 @@ function App() {
       id: 1,
       name: "Design",
       description: "laskdjflas",
-      slug: "/design"
+      slug: "/projects/design"
     },
     timeCommitment: "2 months",
     teamSize: 5,
@@ -116,7 +118,7 @@ function App() {
       id: 1,
       name: "Design",
       description: "laskdjflas",
-      slug: "/design"
+      slug: "/projects/design"
     },
     timeCommitment: "2 months",
     teamSize: 5,
@@ -143,7 +145,7 @@ function App() {
       id: 1,
       name: "Music",
       description: "laskdjflas",
-      slug: "/music"
+      slug: "/projects/music"
     },
     timeCommitment: "2 months",
     teamSize: 5,
@@ -170,7 +172,7 @@ function App() {
       id: 1,
       name: "Other",
       description: "laskdjflas",
-      slug: "/other"
+      slug: "/projects/other"
     },
     timeCommitment: "2 months",
     teamSize: 5,
@@ -220,6 +222,11 @@ function App() {
           <Route path="/projects">
             <Main>
               <Projects projects={projectsList}/>
+            </Main>
+          </Route>
+          <Route path="/projects/music">
+            <Main>
+              <MusicProjects projects={projectsList}/>
             </Main>
           </Route>
           <Route path="/">

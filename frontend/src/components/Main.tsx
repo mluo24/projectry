@@ -41,37 +41,37 @@ const Main = (props: Props) => {
             id: 1,
             name: "Design",
             description: "Description placeholder",
-            slug: "/design"
+            slug: "/projects/design"
         },
         {
             id: 2,
             name: "Art",
             description: "Description placeholder",
-            slug: "/art"
+            slug: "/projects/art"
         },
         {
             id: 3,
             name: "Video",
             description: "Description placeholder",
-            slug: "/video"
+            slug: "/projects/video"
         },
         {
             id: 4,
             name: "Music",
             description: "Description placeholder",
-            slug: "/music"
+            slug: "/projects/music"
         },
         {
             id: 5,
             name: "Tech",
             description: "Description placeholder",
-            slug: "/tech"
+            slug: "/projects/tech"
         },
         {
             id: 6,
             name: "Other",
             description: "Description placeholder",
-            slug: "/other"
+            slug: "/projects/other"
         }
     ];
 
