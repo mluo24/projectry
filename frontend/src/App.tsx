@@ -27,9 +27,6 @@ import Authenticated from './auth/firebaseConfig';
 // import { getUserById, setLoading, setNeedVerification } from './store/authActions';
 // import { RootState } from './store';
 
-
-
-
 function App() {
 
   // const dispatch = useDispatch();
@@ -129,8 +126,6 @@ function App() {
     dateCreated: (new Date()).toString()
     }
   ]
-
-
 
   return (
   //   <BrowserRouter>
