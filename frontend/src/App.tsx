@@ -84,7 +84,7 @@ function App() {
       linkedInURL: "https://linkedin.com",
       dateAccountMade: (new Date()).toString()
     },
-    description: "This is an example project.",
+    description: "This is an example project to be displayed.",
     category: {
       id: 1,
       name: "Design",
@@ -114,12 +114,66 @@ function App() {
       linkedInURL: "https://linkedin.com",
       dateAccountMade: (new Date()).toString()
     },
-    description: "Social media app for college students. Looking for technical and marketing team members.",
+    description: "Looking for technical team members to build a social media app.",
     category: {
       id: 1,
       name: "Design",
       description: "laskdjflas",
       slug: "/design"
+    },
+    timeCommitment: "2 months",
+    teamSize: 5,
+    toolsUsed: "React, Node.js",
+    paid: false,
+    fulfilled: false,
+    dateCreated: (new Date()).toString()
+    },
+    {
+      id: 3,
+      title: "Music Production",
+    user: {
+      id: 3,
+      firstName: "Bob",
+      lastName: "Tan",
+      password: "",
+      interest: "Music",
+      skills: "none",
+      linkedInURL: "https://linkedin.com",
+      dateAccountMade: (new Date()).toString()
+    },
+    description: "Looking for producers, singers, and instrumentalists",
+    category: {
+      id: 1,
+      name: "Music",
+      description: "laskdjflas",
+      slug: "/music"
+    },
+    timeCommitment: "2 months",
+    teamSize: 5,
+    toolsUsed: "React, Node.js",
+    paid: false,
+    fulfilled: false,
+    dateCreated: (new Date()).toString()
+    },
+    {
+      id: 4,
+      title: "Cooking & Baking",
+    user: {
+      id: 2,
+      firstName: "Mary",
+      lastName: "Ahn",
+      password: "",
+      interest: "Cooking and Baking",
+      skills: "none",
+      linkedInURL: "https://linkedin.com",
+      dateAccountMade: (new Date()).toString()
+    },
+    description: "Looking for people interested in collaborative cooking & baking",
+    category: {
+      id: 1,
+      name: "Other",
+      description: "laskdjflas",
+      slug: "/other"
     },
     timeCommitment: "2 months",
     teamSize: 5,
@@ -145,43 +199,43 @@ function App() {
   // </BrowserRouter>
     <MuiThemeProvider theme={theme}>
       <Authenticated>
-        <Router>
-          {/* <div className="app"> */}
-          <Switch>
-            <Route path="/login" component={Login} exact>
-              {/* <Main>
-                <Login />
-              </Main> */}
-            </Route>
-            <Route path="/signup">
-              <Main>
-                <Register />
-              </Main>
-            </Route>
-            <Route path="/example-post">
-              <Main>
-                <Post p={postExample} />
-              </Main>
-            </Route>
-            <Route path="/profile">
-              <Main>
-                <User />
-              </Main>
-            </Route>
-            <Route path="/projects">
-              <Main>
-                <Projects projects={projectsList}/>
-              </Main>
-            </Route>
-            <Route path="/">
-              <Main>
-                <Home />
-              </Main>
-            </Route>
-          </Switch>
-          {/* </div> */}
-        </Router>
-      </Authenticated>
+      <Router>
+        {/* <div className="app"> */}
+        <Switch>
+          <Route path="/login" component={Login} exact>
+            {/* <Main>
+              <Login />
+            </Main> */}
+          </Route>
+          <Route path="/signup">
+            <Main>
+              <Register />
+            </Main>
+          </Route>
+          <Route path="/example-post">
+            <Main>
+              <Post p={postExample} />
+            </Main>
+          </Route>
+          <Route path="/profile">
+            <Main>
+              <User />
+            </Main>
+          </Route>
+          <Route path="/projects">
+            <Main>
+              <Projects projects={projectsList}/>
+            </Main>
+          </Route>
+          <Route path="/">
+            <Main>
+              <Home />
+            </Main>
+          </Route>
+        </Switch>
+        {/* </div> */}
+      </Router>
+    </Authenticated>
     </MuiThemeProvider>
   );
 }

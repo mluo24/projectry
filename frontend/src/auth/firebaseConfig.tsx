@@ -26,7 +26,9 @@ const Authenticated = ({ children }: Props) => {
 
   const uiConfig = {
     signInFlow: 'popup',
-    signInOptions: [firebase.auth.GoogleAuthProvider.PROVIDER_ID],
+    signInOptions: [
+      firebase.auth.GoogleAuthProvider.PROVIDER_ID],
+
   };
 
   function onAuthStateChange() {
