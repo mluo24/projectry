@@ -13,6 +13,7 @@ import User from './components/User';
 import Projects from './components/Projects';
 import Authenticated from './auth/firebaseConfig';
 import MusicProjects from './components/categories/Music';
+import PageNotFound from './components/PageNotFound';
 
 
 // import {useDispatch, useSelector} from 'react-redux';
@@ -199,6 +200,11 @@ function App() {
       <Router>
         {/* <div className="app"> */}
         <Switch>
+          <Route exact path="/">
+            <Main>
+              <Home />
+            </Main>
+          </Route>
           <Route path="/login" component={Login} exact>
             {/* <Main>
               <Login />
@@ -229,9 +235,9 @@ function App() {
               <MusicProjects projects={projectsList}/>
             </Main>
           </Route>
-          <Route path="/">
+          <Route path="*">
             <Main>
-              <Home />
+              <PageNotFound />
             </Main>
           </Route>
         </Switch>
