@@ -1,9 +1,9 @@
-import { Toolbar, List, ListItem, ListItemText, IconButton, Typography, Container, Link, Hidden, Drawer, Button } from '@material-ui/core';
+import { Toolbar, List, ListItem, ListItemText, IconButton, Typography, Container, Hidden, Drawer, Button } from '@material-ui/core';
 import { createStyles, fade, makeStyles, Theme } from '@material-ui/core/styles';
 import MenuIcon from '@material-ui/icons/Menu';
 import React, { DetailedHTMLProps, HTMLAttributes, MouseEventHandler, useState } from 'react';
 import { AccountBox } from '@material-ui/icons';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link  } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import firebase from 'firebase/app';
 
@@ -115,11 +115,11 @@ const SideDrawer = ({ title, links }: Props) => {
         >
             <List component="nav">
                 {links.map(({ title, path }) => (
-                    <a href={path} key={title} className={classes.linkText}>
+                    <Link to={path} key={title} className={classes.linkText}>
                         <ListItem button>
                             <ListItemText primary={title} />
                         </ListItem>
-                    </a>
+                   </Link>
                 ))}
             </List>
         </div>
@@ -196,7 +196,7 @@ const Categories = ({ categories }: Props) => {
             <Toolbar variant="dense" className={classes.toolbarSecondary}>
                 {categories.map(({ name, slug }, index) => (
                     <Typography color="inherit" noWrap key={index}>
-                        <Link href={slug} className={classes.linkText} underline="none">{name}</Link>
+                        <Link to={slug} className={classes.linkText}>{name}</Link>
                     </Typography>
                 ))}
             </Toolbar>

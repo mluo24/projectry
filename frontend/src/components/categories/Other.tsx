@@ -48,18 +48,18 @@ type ProjectsProps = {
     readonly projects : project[]
 }
 
-const MusicProjects = ({projects} : ProjectsProps) => {
+const OtherProjects = ({projects} : ProjectsProps) => {
     const classes = useStyles();
 
     return (
         <Container maxWidth="md">
             <Typography gutterBottom align="center" variant="h4" component="h1">
-                Music Projects
+                Other
             </Typography>
 
         <Grid container spacing={2}>
         {projects.filter(project => 
-                project.category.name === "Music").map((project, index) => (
+                project.category.name === "Other").map((project, index) => (
                 <Grid item key={index} xs={12} md={4}>
                     <ProjectCard p={project}/>
                 </Grid>
@@ -71,5 +71,5 @@ const MusicProjects = ({projects} : ProjectsProps) => {
 
 
 
-export default MusicProjects;
+export default OtherProjects;
 

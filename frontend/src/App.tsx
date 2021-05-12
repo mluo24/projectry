@@ -13,6 +13,11 @@ import User from './components/User';
 import Projects from './components/Projects';
 import Authenticated from './auth/firebaseConfig';
 import MusicProjects from './components/categories/Music';
+import DesignProjects from './components/categories/Design';
+import TechProjects from './components/categories/Tech';
+import ArtProjects from './components/categories/Art';
+import VideoProjects from './components/categories/Video';
+import OtherProjects from './components/categories/Other';
 
 
 // import {useDispatch, useSelector} from 'react-redux';
@@ -116,9 +121,9 @@ function App() {
     description: "Looking for technical team members to build a social media app.",
     category: {
       id: 1,
-      name: "Design",
+      name: "Tech",
       description: "laskdjflas",
-      slug: "/projects/design"
+      slug: "/projects/tech"
     },
     timeCommitment: "2 months",
     teamSize: 5,
@@ -180,6 +185,141 @@ function App() {
     paid: false,
     fulfilled: false,
     dateCreated: (new Date()).toString()
+    },
+    {
+      id: 5,
+      title: "Music Video Shoot",
+    user: {
+      id: 2,
+      firstName: "Yohan",
+      lastName: "Kim",
+      password: "",
+      interest: "music, video",
+      skills: "none",
+      linkedInURL: "https://linkedin.com",
+      dateAccountMade: (new Date()).toString()
+    },
+    description: "music video shoot using drone",
+    category: {
+      id: 1,
+      name: "Video",
+      description: "laskdjflas",
+      slug: "/projects/video"
+    },
+    timeCommitment: "2 months",
+    teamSize: 5,
+    toolsUsed: "React, Node.js",
+    paid: false,
+    fulfilled: false,
+    dateCreated: (new Date()).toString()
+    },
+    {
+      id: 6,
+      title: "Hiphop Dance Team",
+    user: {
+      id: 2,
+      firstName: "Alex",
+      lastName: "Steve",
+      password: "",
+      interest: "choreography",
+      skills: "none",
+      linkedInURL: "https://linkedin.com",
+      dateAccountMade: (new Date()).toString()
+    },
+    description: "hiphop music choreography",
+    category: {
+      id: 1,
+      name: "Other",
+      description: "laskdjflas",
+      slug: "/projects/other"
+    },
+    timeCommitment: "2 months",
+    teamSize: 5,
+    toolsUsed: "React, Node.js",
+    paid: false,
+    fulfilled: false,
+    dateCreated: (new Date()).toString()
+    },
+    {
+      id: 7,
+      title: "Jazz Band",
+    user: {
+      id: 6,
+      firstName: "Paul",
+      lastName: "Merril",
+      password: "",
+      interest: "jazz",
+      skills: "none",
+      linkedInURL: "https://linkedin.com",
+      dateAccountMade: (new Date()).toString()
+    },
+    description: "looking for people interested in forming a jazz band",
+    category: {
+      id: 1,
+      name: "Music",
+      description: "laskdjflas",
+      slug: "/projects/music"
+    },
+    timeCommitment: "2 months",
+    teamSize: 5,
+    toolsUsed: "React, Node.js",
+    paid: false,
+    fulfilled: false,
+    dateCreated: (new Date()).toString()
+    },
+    {
+      id: 4,
+      title: "Blockchain smart contract",
+    user: {
+      id: 2,
+      firstName: "Mindy",
+      lastName: "Zhu",
+      password: "",
+      interest: "blockchain",
+      skills: "solidity programming language",
+      linkedInURL: "https://linkedin.com",
+      dateAccountMade: (new Date()).toString()
+    },
+    description: "Smart contract dev using Solidity",
+    category: {
+      id: 1,
+      name: "Tech",
+      description: "laskdjflas",
+      slug: "/projects/tech"
+    },
+    timeCommitment: "2 months",
+    teamSize: 5,
+    toolsUsed: "React, Node.js",
+    paid: false,
+    fulfilled: false,
+    dateCreated: (new Date()).toString()
+    },
+    {
+      id: 8,
+      title: "NFT",
+    user: {
+      id: 2,
+      firstName: "Rachel",
+      lastName: "Snowman",
+      password: "",
+      interest: "blockchain dev",
+      skills: "none",
+      linkedInURL: "https://linkedin.com",
+      dateAccountMade: (new Date()).toString()
+    },
+    description: "Looking for people interested in collaborative cooking & baking",
+    category: {
+      id: 1,
+      name: "Tech",
+      description: "laskdjflas",
+      slug: "/projects/tech"
+    },
+    timeCommitment: "2 months",
+    teamSize: 5,
+    toolsUsed: "React, Node.js",
+    paid: false,
+    fulfilled: false,
+    dateCreated: (new Date()).toString()
     }
   ]
 
@@ -219,14 +359,39 @@ function App() {
               <User />
             </Main>
           </Route>
-          <Route path="/projects">
-            <Main>
-              <Projects projects={projectsList}/>
-            </Main>
-          </Route>
           <Route path="/projects/music">
             <Main>
               <MusicProjects projects={projectsList}/>
+            </Main>
+            </Route>
+          <Route path="/projects/design">
+            <Main>
+              <DesignProjects projects={projectsList}/>
+            </Main>
+          </Route>
+          <Route path="/projects/tech">
+            <Main>
+              <TechProjects projects={projectsList}/>
+            </Main>
+          </Route>
+          <Route path="/projects/art">
+            <Main>
+              <ArtProjects projects={projectsList}/>
+            </Main>
+          </Route>
+          <Route path="/projects/video">
+            <Main>
+              <VideoProjects projects={projectsList}/>
+            </Main>
+          </Route>
+          <Route path="/projects/other">
+            <Main>
+              <OtherProjects projects={projectsList}/>
+            </Main>
+          </Route>
+          <Route path="/projects">
+            <Main>
+              <Projects projects={projectsList}/>
             </Main>
           </Route>
           <Route path="/">
