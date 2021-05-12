@@ -18,6 +18,7 @@ import TechProjects from './components/categories/Tech';
 import ArtProjects from './components/categories/Art';
 import VideoProjects from './components/categories/Video';
 import OtherProjects from './components/categories/Other';
+import PageNotFound from './components/PageNotFound';
 
 
 // import {useDispatch, useSelector} from 'react-redux';
@@ -339,6 +340,11 @@ function App() {
       <Router>
         {/* <div className="app"> */}
         <Switch>
+          <Route exact path="/">
+            <Main>
+              <Home />
+            </Main>
+          </Route>
           <Route path="/login" component={Login} exact>
             {/* <Main>
               <Login />
@@ -394,9 +400,9 @@ function App() {
               <Projects projects={projectsList}/>
             </Main>
           </Route>
-          <Route path="/">
+          <Route path="*">
             <Main>
-              <Home />
+              <PageNotFound />
             </Main>
           </Route>
         </Switch>
