@@ -127,7 +127,6 @@ const SideDrawer = ({ title, links }: Props) => {
 
     return (
         <>
-            {/* onClick={toggleDrawer("right", true)}*/}
             <IconButton edge="start" color="inherit" aria-label="menu" onClick={toggleDrawer("right", true)}>
                 <MenuIcon />
             </IconButton>
@@ -150,9 +149,6 @@ const Navbar = ({ title, links, categories }: Props) => {
     // const logoutClickHandler = () => {
     //     dispatch(signout());
     // }
-
-
-
 
     return (
         <Toolbar className={classes.toolbarMain}>
@@ -189,14 +185,12 @@ const Categories = ({ categories }: Props) => {
 
     const classes = useStyles();
 
-    // const categoryList: string[] = ["Category 1", "Category 2", "Category 3", "Category 4"];
-
     return (
         <Container maxWidth="md">
             <Toolbar variant="dense" className={classes.toolbarSecondary}>
-                {categories.map(({ name, slug }, index) => (
+                {categories.map(({id, name, slug }, index) => (
                     <Typography color="inherit" noWrap key={index}>
-                        <Link to={slug} className={classes.linkText}>{name}</Link>
+                        <Link to={"/" + id + "/" + slug} className={classes.linkText}>{name}</Link>
                     </Typography>
                 ))}
             </Toolbar>
@@ -210,7 +204,6 @@ const Header = ({ title, links, categories }: Props) => {
             <Navbar title={title} links={links} categories={categories} />
             <Categories title={title} links={links} categories={categories} />
         </>
-
     );
 }
 

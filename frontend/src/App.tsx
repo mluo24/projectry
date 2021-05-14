@@ -12,13 +12,14 @@ import Post, { project } from './components/Post';
 import User from './components/User';
 import Projects from './components/Projects';
 import Authenticated from './auth/firebaseConfig';
-import MusicProjects from './components/categories/Music';
-import DesignProjects from './components/categories/Design';
-import TechProjects from './components/categories/Tech';
-import ArtProjects from './components/categories/Art';
-import VideoProjects from './components/categories/Video';
-import OtherProjects from './components/categories/Other';
+// import MusicProjects from './components/categories/Music';
+// import DesignProjects from './components/categories/Design';
+// import TechProjects from './components/categories/Tech';
+// import ArtProjects from './components/categories/Art';
+// import VideoProjects from './components/categories/Video';
+// import OtherProjects from './components/categories/Other';
 import PageNotFound from './components/PageNotFound';
+import CreateProjectForm from './forms/CreateProjectForm';
 
 
 // import {useDispatch, useSelector} from 'react-redux';
@@ -85,7 +86,7 @@ function App() {
       lastName: "Doe",
       password: "",
       interest: "Tech",
-      skills: "none",
+      skills: [],
       linkedInURL: "https://linkedin.com",
       dateAccountMade: (new Date()).toString()
     },
@@ -115,7 +116,7 @@ function App() {
       lastName: "Doe",
       password: "",
       interest: "Tech",
-      skills: "none",
+      skills: [],
       linkedInURL: "https://linkedin.com",
       dateAccountMade: (new Date()).toString()
     },
@@ -142,7 +143,7 @@ function App() {
       lastName: "Tan",
       password: "",
       interest: "Music",
-      skills: "none",
+      skills: [],
       linkedInURL: "https://linkedin.com",
       dateAccountMade: (new Date()).toString()
     },
@@ -169,7 +170,7 @@ function App() {
       lastName: "Ahn",
       password: "",
       interest: "Cooking and Baking",
-      skills: "none",
+      skills: [],
       linkedInURL: "https://linkedin.com",
       dateAccountMade: (new Date()).toString()
     },
@@ -196,7 +197,7 @@ function App() {
       lastName: "Kim",
       password: "",
       interest: "music, video",
-      skills: "none",
+      skills: [],
       linkedInURL: "https://linkedin.com",
       dateAccountMade: (new Date()).toString()
     },
@@ -223,7 +224,7 @@ function App() {
       lastName: "Steve",
       password: "",
       interest: "choreography",
-      skills: "none",
+      skills: [],
       linkedInURL: "https://linkedin.com",
       dateAccountMade: (new Date()).toString()
     },
@@ -250,7 +251,7 @@ function App() {
       lastName: "Merril",
       password: "",
       interest: "jazz",
-      skills: "none",
+      skills: [],
       linkedInURL: "https://linkedin.com",
       dateAccountMade: (new Date()).toString()
     },
@@ -277,7 +278,7 @@ function App() {
       lastName: "Zhu",
       password: "",
       interest: "blockchain",
-      skills: "solidity programming language",
+      skills: ["solidity programming language"],
       linkedInURL: "https://linkedin.com",
       dateAccountMade: (new Date()).toString()
     },
@@ -304,7 +305,7 @@ function App() {
       lastName: "Snowman",
       password: "",
       interest: "blockchain dev",
-      skills: "none",
+      skills: [],
       linkedInURL: "https://linkedin.com",
       dateAccountMade: (new Date()).toString()
     },
@@ -335,10 +336,11 @@ function App() {
   //       <PrivateRoute path="/dashboard" component={Dashboard} exact />
   //     </Switch>
   // </BrowserRouter>
+  
+  //  React.FC<{}> use this instead!
     <MuiThemeProvider theme={theme}>
       <Authenticated>
       <Router>
-        {/* <div className="app"> */}
         <Switch>
           <Route exact path="/">
             <Main>
@@ -346,18 +348,10 @@ function App() {
             </Main>
           </Route>
           <Route path="/login" component={Login} exact>
-            {/* <Main>
-              <Login />
-            </Main> */}
           </Route>
           <Route path="/signup">
             <Main>
               <Register />
-            </Main>
-          </Route>
-          <Route path="/example-post">
-            <Main>
-              <Post p={postExample} />
             </Main>
           </Route>
           <Route path="/profile">
@@ -365,39 +359,16 @@ function App() {
               <User />
             </Main>
           </Route>
-          <Route path="/projects/music">
+          <Route path="/create-project">
             <Main>
-              <MusicProjects projects={projectsList}/>
-            </Main>
-            </Route>
-          <Route path="/projects/design">
-            <Main>
-              <DesignProjects projects={projectsList}/>
+              <CreateProjectForm />
             </Main>
           </Route>
-          <Route path="/projects/tech">
+          <Route exact path="/:id/:category" children={<Projects />} />
+          <Route exact path="/projects" children={<Projects />} />
+          <Route exact path="/projects/:id/:title">
             <Main>
-              <TechProjects projects={projectsList}/>
-            </Main>
-          </Route>
-          <Route path="/projects/art">
-            <Main>
-              <ArtProjects projects={projectsList}/>
-            </Main>
-          </Route>
-          <Route path="/projects/video">
-            <Main>
-              <VideoProjects projects={projectsList}/>
-            </Main>
-          </Route>
-          <Route path="/projects/other">
-            <Main>
-              <OtherProjects projects={projectsList}/>
-            </Main>
-          </Route>
-          <Route path="/projects">
-            <Main>
-              <Projects projects={projectsList}/>
+              <Post />
             </Main>
           </Route>
           <Route path="*">
@@ -406,7 +377,6 @@ function App() {
             </Main>
           </Route>
         </Switch>
-        {/* </div> */}
       </Router>
     </Authenticated>
     </MuiThemeProvider>

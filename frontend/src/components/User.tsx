@@ -16,7 +16,7 @@ export type user = {
     lastName: string,
     password: string,
     interest: string,
-    skills: string,
+    skills: string[],
     linkedInURL: string,
     dateAccountMade: string
 }

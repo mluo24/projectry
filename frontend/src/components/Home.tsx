@@ -1,6 +1,10 @@
 import { Card, CardContent, CardMedia, Container, Grid, Hidden, Link, Typography } from '@material-ui/core';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import React from 'react';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import { category } from './Header';
+
+type DataType = readonly category[];
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -56,11 +60,19 @@ const categoryCardList = [
 
 const CategoryCards = () => {
 
+    const [categories, setCategories] = useState<DataType>([]);
+
+    useEffect(() => {
+        axios.get<DataType>('/getCategories').then(response => {
+            setCategories(response.data);
+        })
+    }, [categories]);
+
     const classes = useStyles();
 
     return (
         <Grid container spacing={4} className={classes.spacingAdjustment}>
-            {categoryCardList.map(({ name, description, slug }, index) => (
+            {categories.map(({ id, name, description, slug }, index) => (
                 <Grid item key={index} xs={12} md={6}>
                     <Card className={classes.card}>
                         <div className={classes.cardDetails}>
@@ -70,7 +82,7 @@ const CategoryCards = () => {
                                     {description}
                                 </Typography>
                                 <Typography variant="subtitle2" color="primary">
-                                    <Link href={slug}>See projects &rarr;</Link>
+                                    <Link href={id + "/" + slug}>See projects &rarr;</Link>
                                 </Typography>
                             </CardContent>
                         </div>

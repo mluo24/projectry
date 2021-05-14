@@ -1,6 +1,7 @@
 import { Box, Container, makeStyles, Typography } from '@material-ui/core';
-import React, { ReactNode } from 'react';
-import Header from './Header';
+import axios from 'axios';
+import React, { ReactNode, useEffect, useState } from 'react';
+import Header, { category } from './Header';
 // import IconButton from '@material-ui/core/IconButton';
 // import { AccountBox } from '@material-ui/icons';
 
@@ -33,52 +34,61 @@ const Main = (props: Props) => {
         //{ title: "Log In", path: "/login" },
        // { title: "Sign Up", path: "/signup" },
         { title: "Profile", path: "/profile" },
-        { title: "Message", path: "/message" }
+        { title: "Message", path: "/message" },
+        { title: "Project+", path: "/create-project"}
     ];
 
-    const categoryCardList = [
-        {
-            id: 1,
-            name: "Design",
-            description: "Description placeholder",
-            slug: "/projects/design"
-        },
-        {
-            id: 2,
-            name: "Art",
-            description: "Description placeholder",
-            slug: "/projects/art"
-        },
-        {
-            id: 3,
-            name: "Video",
-            description: "Description placeholder",
-            slug: "/projects/video"
-        },
-        {
-            id: 4,
-            name: "Music",
-            description: "Description placeholder",
-            slug: "/projects/music"
-        },
-        {
-            id: 5,
-            name: "Tech",
-            description: "Description placeholder",
-            slug: "/projects/tech"
-        },
-        {
-            id: 6,
-            name: "Other",
-            description: "Description placeholder",
-            slug: "/projects/other"
-        }
-    ];
+    // const categoryCardList = [
+    //     {
+    //         id: 1,
+    //         name: "Design",
+    //         description: "Description placeholder",
+    //         slug: "/projects/design"
+    //     },
+    //     {
+    //         id: 2,
+    //         name: "Art",
+    //         description: "Description placeholder",
+    //         slug: "/projects/art"
+    //     },
+    //     {
+    //         id: 3,
+    //         name: "Video",
+    //         description: "Description placeholder",
+    //         slug: "/projects/video"
+    //     },
+    //     {
+    //         id: 4,
+    //         name: "Music",
+    //         description: "Description placeholder",
+    //         slug: "/projects/music"
+    //     },
+    //     {
+    //         id: 5,
+    //         name: "Tech",
+    //         description: "Description placeholder",
+    //         slug: "/projects/tech"
+    //     },
+    //     {
+    //         id: 6,
+    //         name: "Other",
+    //         description: "Description placeholder",
+    //         slug: "/projects/other"
+    //     }
+    // ];
+
+    const [categories, setCategories] = useState<category[]>([]);
+
+    useEffect(() => {
+        axios.get<category[]>('/getCategories').then(response => {
+            setCategories(response.data);
+        })
+    }, [categories]);
 
 
     return (
         <div className={classes.root}>
-            <Header title="Projectry" links={links} categories={categoryCardList} />
+            <Header title="Projectry" links={links} categories={categories} />
             <Box m={5}>
                 {props.children}
             </Box>

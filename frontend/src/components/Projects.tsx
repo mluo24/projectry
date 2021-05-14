@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -10,7 +10,10 @@ import Typography from '@material-ui/core/Typography';
 import { Container, Grid } from '@material-ui/core';
 import User, { user } from './User';
 import { category } from './Header';
-import { project } from './Post';
+import { project, projectFirebase } from './Post';
+import axios from 'axios';
+import { useParams } from 'react-router';
+import Main from './Main';
 
 export type post = {
     title: string,
@@ -20,7 +23,7 @@ export type post = {
 }
 
 export type ProjectCardProps = {
-    readonly p : project
+    readonly p : projectFirebase
 }
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -51,9 +54,27 @@ const useStyles = makeStyles((theme: Theme) =>
     }),
 );
 
+// slugify title
+function slugify(string : string) {
+    const a = 'àáâäæãåāăąçćčđďèéêëēėęěğǵḧîïíīįìłḿñńǹňôöòóœøōõőṕŕřßśšşșťțûüùúūǘůűųẃẍÿýžźż·/_,:;'
+    const b = 'aaaaaaaaaacccddeeeeeeeegghiiiiiilmnnnnoooooooooprrsssssttuuuuuuuuuwxyyzzz------'
+    const p = new RegExp(a.split('').join('|'), 'g')
+  
+    return string.toString().toLowerCase()
+      .replace(/\s+/g, '-') // Replace spaces with -
+      .replace(p, c => b.charAt(a.indexOf(c))) // Replace special characters
+      .replace(/&/g, '-and-') // Replace & with 'and'
+      .replace(/[^\w\-]+/g, '') // Remove all non-word characters
+      .replace(/\-\-+/g, '-') // Replace multiple - with single -
+      .replace(/^-+/, '') // Trim - from start of text
+      .replace(/-+$/, '') // Trim - from end of text
+  }
+
 export const ProjectCard = ({p} : ProjectCardProps) => {
 
     const classes = useStyles();
+
+    const url = "/projects/" + p.id + "/" + slugify(p.title);
 
     return (
         <Card className={classes.root}>
@@ -73,7 +94,7 @@ export const ProjectCard = ({p} : ProjectCardProps) => {
           </CardContent>
         </CardActionArea>
         <CardActions>
-          <Button size="small" color="primary">
+          <Button size="small" color="primary" href={url}>
             Learn More
           </Button>
         </CardActions>
@@ -81,27 +102,48 @@ export const ProjectCard = ({p} : ProjectCardProps) => {
     );
 }
 
-type ProjectsProps = {
-    readonly projects : project[]
+type ParamTypes = {
+    id : string,
+    category : string
 }
 
-const Projects = ({projects} : ProjectsProps) => {
+const Projects = () => {
+
+    const {id, category} = useParams<ParamTypes>();
+
+    const [projects, setProjects] = useState<readonly projectFirebase[]>([]);
+
+    useEffect(() => {
+        if (!id) {
+            axios.get<readonly projectFirebase[]>('/getAllProjects').then(response => {
+                setProjects(response.data);
+            })
+        }
+        else {
+            axios.get<readonly projectFirebase[]>(`/getProjectsByCategory/${id}`).then(response => {
+                setProjects(response.data);
+            })
+        }
+    }, [projects]);
+
     const classes = useStyles();
 
     return (
-        <Container maxWidth="md">
-            <Typography gutterBottom align="center" variant="h3" component="h1">
-                Project List
-            </Typography>
+        <Main>
+            <Container maxWidth="md">
+                <Typography gutterBottom align="center" variant="h3" component="h1">
+                    {!id ? "Project List" : "Projects from " + category.charAt(0).toUpperCase() + category.slice(1) }
+                </Typography>
 
-        <Grid container spacing={2}>
-            {projects.map((project, index) => (
-                <Grid item key={index} xs={12} md={4}>
-                    <ProjectCard p={project}/>
-                </Grid>
-            ))}
-        </Grid>
-        </Container>
+            <Grid container spacing={2}>
+                {projects.map((project, index) => (
+                    <Grid item key={index} xs={12} md={4}>
+                        <ProjectCard p={project}/>
+                    </Grid>
+                ))}
+            </Grid>
+            </Container>
+        </Main>
     );
 }
 

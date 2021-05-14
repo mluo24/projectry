@@ -1,5 +1,9 @@
+// import type { Timestamp } from '@firebase/firestore-types';
 import { Container, Grid, List, ListItem, ListItemText, Typography } from '@material-ui/core';
-import React from 'react';
+import axios from 'axios';
+import { firestore } from 'firebase-admin';
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import { category } from './Header';
 import { user } from './User';
 
@@ -17,25 +21,56 @@ export type project = {
     dateCreated: string
 }
 
-
-type Props = {
-    p: project
+export type projectFirebase = {
+    id: number,
+    title: string,
+    uid: string,
+    description: string,
+    catid: string,
+    timeCommitment: string,
+    teamSize: number,
+    toolsUsed: string[],
+    paid: boolean,
+    fulfilled: boolean,
+    dateCreated: firestore.Timestamp
 }
 
-const Post = ({ p }: Props) => {
+
+// type Props = {
+//     p: projectFirebase
+// }
+
+const Post = () => {
+
+    const { id } = useParams<{ id: string }>();
+
+    const [projectPost, setProjectPost] = useState<projectFirebase>({} as projectFirebase);
+    const [user, setUser] = useState<user>({} as user);
+
+    useEffect(() => {
+        axios.get<projectFirebase>(`/getProjectById/${id}`).then(response => {
+            setProjectPost(response.data);
+        });
+    }, [projectPost]);
+
+    // useEffect(() => {
+    //     axios.get<user>(`/getUserInfo/${projectPost.uid}`).then(response => {
+    //         setUser(response.data);
+    //     });
+    // }, [user]);
 
     return (
         <Container maxWidth="md">
             <Typography component="h1" variant="h4" align="center">
-                {p.title}
+                {projectPost.title}
             </Typography>
-            <Typography variant="subtitle2">
-                Made by {p.user.firstName} {p.user.lastName} on {p.dateCreated}
-            </Typography>
+            {/* <Typography variant="subtitle2">
+                Made by on {projectPost.dateCreated}
+            </Typography> */}
             <Grid container spacing={4}>
                 <Grid item xs={12} md={8}>
                     <Typography variant="body1">
-                        {p.description}
+                        {projectPost.description}
                     </Typography>
                 </Grid>
                 <Grid item xs={12} md={4}>
@@ -45,22 +80,22 @@ const Post = ({ p }: Props) => {
                     <List>
                         <ListItem>
                             <ListItemText>
-                                Time Commitment: {p.timeCommitment}
+                                Time Commitment: {projectPost.timeCommitment}
                             </ListItemText>
                         </ListItem>
                         <ListItem>
                             <ListItemText>
-                                Team Size: {p.teamSize} {p.teamSize === 1 ? "person" : "people"}
+                                Team Size: {projectPost.teamSize} {projectPost.teamSize === 1 ? "person" : "people"}
                             </ListItemText>
                         </ListItem>
                         <ListItem>
                             <ListItemText>
-                                Tools Used: {p.toolsUsed}
+                                Tools Used: {projectPost.toolsUsed}
                             </ListItemText>
                         </ListItem>
                         <ListItem>
                             <ListItemText>
-                                Paid?: {p.paid}
+                                Paid?: {projectPost.paid ? "Yes" : "No"}
                             </ListItemText>
                         </ListItem>
                     </List>

@@ -1,4 +1,5 @@
-import admin from 'firebase-admin';
+// import type { Timestamp } from '@firebase/firestore-types';
+import admin, { firestore } from 'firebase-admin';
 import express from 'express';
 
 const serviceAccount = require('../service-account.json');
@@ -26,7 +27,20 @@ type Project = {
   dateCreated: string
 }
 
-type ProjectWithID = Project & {
+type ProjectT = {
+  title: string,
+  uid: string,
+  description: string,
+  catid: string,
+  timeCommitment: string,
+  teamSize: number,
+  toolsUsed: string[],
+  paid: boolean,
+  fulfilled: boolean,
+  dateCreated: firestore.Timestamp
+}
+
+type ProjectWithID = ProjectT & {
   id : string
 }
 
@@ -124,6 +138,7 @@ app.get('/getProjectById/:id', async (req, res) => {
   const id = req.params.id;
   const projectsSnapshot = await projectsCollection.doc(id).get();
   const project: ProjectWithID = projectsSnapshot.data() as ProjectWithID;
+  console.log(project.dateCreated)
   res.send(project);
 });
 
