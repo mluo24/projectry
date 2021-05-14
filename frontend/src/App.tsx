@@ -36,6 +36,10 @@ import CreateProjectForm from './forms/CreateProjectForm';
 // import { getUserById, setLoading, setNeedVerification } from './store/authActions';
 // import { RootState } from './store';
 
+const firebase = require("firebase");
+// Required for side-effects
+require("firebase/firestore");
+
 function App() {
 
   // const dispatch = useDispatch();
@@ -77,253 +81,253 @@ function App() {
     },
   });
 
-  const postExample: project = {
-    id: 1,
-    title: "Example Project ",
-    user: {
-      id: 1,
-      firstName: "John",
-      lastName: "Doe",
-      password: "",
-      interest: "Tech",
-      skills: [],
-      linkedInURL: "https://linkedin.com",
-      dateAccountMade: (new Date()).toString()
-    },
-    description: "This is an example project to be displayed.",
-    category: {
-      id: 1,
-      name: "Design",
-      description: "laskdjflas",
-      slug: "/projects/design"
-    },
-    timeCommitment: "2 months",
-    teamSize: 5,
-    toolsUsed: "React, Node.js",
-    paid: false,
-    fulfilled: false,
-    dateCreated: (new Date()).toString()
-  }
+  // const postExample: project = {
+  //   id: 1,
+  //   title: "Example Project ",
+  //   user: {
+  //     id: 1,
+  //     firstName: "John",
+  //     lastName: "Doe",
+  //     password: "",
+  //     interest: "Tech",
+  //     skills: [],
+  //     linkedInURL: "https://linkedin.com",
+  //     dateAccountMade: (new Date()).toString()
+  //   },
+  //   description: "This is an example project to be displayed.",
+  //   category: {
+  //     id: 1,
+  //     name: "Design",
+  //     description: "laskdjflas",
+  //     slug: "/projects/design"
+  //   },
+  //   timeCommitment: "2 months",
+  //   teamSize: 5,
+  //   toolsUsed: "React, Node.js",
+  //   paid: false,
+  //   fulfilled: false,
+  //   dateCreated: (new Date()).toString()
+  // }
 
-  const projectsList : project[] = [
-    postExample,
-    {
-      id: 2,
-      title: "iOS App Dev",
-    user: {
-      id: 1,
-      firstName: "John",
-      lastName: "Doe",
-      password: "",
-      interest: "Tech",
-      skills: [],
-      linkedInURL: "https://linkedin.com",
-      dateAccountMade: (new Date()).toString()
-    },
-    description: "Looking for technical team members to build a social media app.",
-    category: {
-      id: 1,
-      name: "Tech",
-      description: "laskdjflas",
-      slug: "/projects/tech"
-    },
-    timeCommitment: "2 months",
-    teamSize: 5,
-    toolsUsed: "React, Node.js",
-    paid: false,
-    fulfilled: false,
-    dateCreated: (new Date()).toString()
-    },
-    {
-      id: 3,
-      title: "Music Production",
-    user: {
-      id: 3,
-      firstName: "Bob",
-      lastName: "Tan",
-      password: "",
-      interest: "Music",
-      skills: [],
-      linkedInURL: "https://linkedin.com",
-      dateAccountMade: (new Date()).toString()
-    },
-    description: "Looking for producers, singers, and instrumentalists",
-    category: {
-      id: 1,
-      name: "Music",
-      description: "laskdjflas",
-      slug: "/projects/music"
-    },
-    timeCommitment: "2 months",
-    teamSize: 5,
-    toolsUsed: "React, Node.js",
-    paid: false,
-    fulfilled: false,
-    dateCreated: (new Date()).toString()
-    },
-    {
-      id: 4,
-      title: "Cooking & Baking",
-    user: {
-      id: 2,
-      firstName: "Mary",
-      lastName: "Ahn",
-      password: "",
-      interest: "Cooking and Baking",
-      skills: [],
-      linkedInURL: "https://linkedin.com",
-      dateAccountMade: (new Date()).toString()
-    },
-    description: "Looking for people interested in collaborative cooking & baking",
-    category: {
-      id: 1,
-      name: "Other",
-      description: "laskdjflas",
-      slug: "/projects/other"
-    },
-    timeCommitment: "2 months",
-    teamSize: 5,
-    toolsUsed: "React, Node.js",
-    paid: false,
-    fulfilled: false,
-    dateCreated: (new Date()).toString()
-    },
-    {
-      id: 5,
-      title: "Music Video Shoot",
-    user: {
-      id: 2,
-      firstName: "Yohan",
-      lastName: "Kim",
-      password: "",
-      interest: "music, video",
-      skills: [],
-      linkedInURL: "https://linkedin.com",
-      dateAccountMade: (new Date()).toString()
-    },
-    description: "music video shoot using drone",
-    category: {
-      id: 1,
-      name: "Video",
-      description: "laskdjflas",
-      slug: "/projects/video"
-    },
-    timeCommitment: "2 months",
-    teamSize: 5,
-    toolsUsed: "React, Node.js",
-    paid: false,
-    fulfilled: false,
-    dateCreated: (new Date()).toString()
-    },
-    {
-      id: 6,
-      title: "Hiphop Dance Team",
-    user: {
-      id: 2,
-      firstName: "Alex",
-      lastName: "Steve",
-      password: "",
-      interest: "choreography",
-      skills: [],
-      linkedInURL: "https://linkedin.com",
-      dateAccountMade: (new Date()).toString()
-    },
-    description: "hiphop music choreography",
-    category: {
-      id: 1,
-      name: "Other",
-      description: "laskdjflas",
-      slug: "/projects/other"
-    },
-    timeCommitment: "2 months",
-    teamSize: 5,
-    toolsUsed: "React, Node.js",
-    paid: false,
-    fulfilled: false,
-    dateCreated: (new Date()).toString()
-    },
-    {
-      id: 7,
-      title: "Jazz Band",
-    user: {
-      id: 6,
-      firstName: "Paul",
-      lastName: "Merril",
-      password: "",
-      interest: "jazz",
-      skills: [],
-      linkedInURL: "https://linkedin.com",
-      dateAccountMade: (new Date()).toString()
-    },
-    description: "looking for people interested in forming a jazz band",
-    category: {
-      id: 1,
-      name: "Music",
-      description: "laskdjflas",
-      slug: "/projects/music"
-    },
-    timeCommitment: "2 months",
-    teamSize: 5,
-    toolsUsed: "React, Node.js",
-    paid: false,
-    fulfilled: false,
-    dateCreated: (new Date()).toString()
-    },
-    {
-      id: 4,
-      title: "Blockchain smart contract",
-    user: {
-      id: 2,
-      firstName: "Mindy",
-      lastName: "Zhu",
-      password: "",
-      interest: "blockchain",
-      skills: ["solidity programming language"],
-      linkedInURL: "https://linkedin.com",
-      dateAccountMade: (new Date()).toString()
-    },
-    description: "Smart contract dev using Solidity",
-    category: {
-      id: 1,
-      name: "Tech",
-      description: "laskdjflas",
-      slug: "/projects/tech"
-    },
-    timeCommitment: "2 months",
-    teamSize: 5,
-    toolsUsed: "React, Node.js",
-    paid: false,
-    fulfilled: false,
-    dateCreated: (new Date()).toString()
-    },
-    {
-      id: 8,
-      title: "NFT",
-    user: {
-      id: 2,
-      firstName: "Rachel",
-      lastName: "Snowman",
-      password: "",
-      interest: "blockchain dev",
-      skills: [],
-      linkedInURL: "https://linkedin.com",
-      dateAccountMade: (new Date()).toString()
-    },
-    description: "Looking for people interested in collaborative cooking & baking",
-    category: {
-      id: 1,
-      name: "Tech",
-      description: "laskdjflas",
-      slug: "/projects/tech"
-    },
-    timeCommitment: "2 months",
-    teamSize: 5,
-    toolsUsed: "React, Node.js",
-    paid: false,
-    fulfilled: false,
-    dateCreated: (new Date()).toString()
-    }
-  ]
+  // const projectsList : project[] = [
+  //   postExample,
+  //   {
+  //     id: 2,
+  //     title: "iOS App Dev",
+  //   user: {
+  //     id: 1,
+  //     firstName: "John",
+  //     lastName: "Doe",
+  //     password: "",
+  //     interest: "Tech",
+  //     skills: [],
+  //     linkedInURL: "https://linkedin.com",
+  //     dateAccountMade: (new Date()).toString()
+  //   },
+  //   description: "Looking for technical team members to build a social media app.",
+  //   category: {
+  //     id: 1,
+  //     name: "Tech",
+  //     description: "laskdjflas",
+  //     slug: "/projects/tech"
+  //   },
+  //   timeCommitment: "2 months",
+  //   teamSize: 5,
+  //   toolsUsed: "React, Node.js",
+  //   paid: false,
+  //   fulfilled: false,
+  //   dateCreated: (new Date()).toString()
+  //   },
+  //   {
+  //     id: 3,
+  //     title: "Music Production",
+  //   user: {
+  //     id: 3,
+  //     firstName: "Bob",
+  //     lastName: "Tan",
+  //     password: "",
+  //     interest: "Music",
+  //     skills: [],
+  //     linkedInURL: "https://linkedin.com",
+  //     dateAccountMade: (new Date()).toString()
+  //   },
+  //   description: "Looking for producers, singers, and instrumentalists",
+  //   category: {
+  //     id: 1,
+  //     name: "Music",
+  //     description: "laskdjflas",
+  //     slug: "/projects/music"
+  //   },
+  //   timeCommitment: "2 months",
+  //   teamSize: 5,
+  //   toolsUsed: "React, Node.js",
+  //   paid: false,
+  //   fulfilled: false,
+  //   dateCreated: (new Date()).toString()
+  //   },
+  //   {
+  //     id: 4,
+  //     title: "Cooking & Baking",
+  //   user: {
+  //     id: 2,
+  //     firstName: "Mary",
+  //     lastName: "Ahn",
+  //     password: "",
+  //     interest: "Cooking and Baking",
+  //     skills: [],
+  //     linkedInURL: "https://linkedin.com",
+  //     dateAccountMade: (new Date()).toString()
+  //   },
+  //   description: "Looking for people interested in collaborative cooking & baking",
+  //   category: {
+  //     id: 1,
+  //     name: "Other",
+  //     description: "laskdjflas",
+  //     slug: "/projects/other"
+  //   },
+  //   timeCommitment: "2 months",
+  //   teamSize: 5,
+  //   toolsUsed: "React, Node.js",
+  //   paid: false,
+  //   fulfilled: false,
+  //   dateCreated: (new Date()).toString()
+  //   },
+  //   {
+  //     id: 5,
+  //     title: "Music Video Shoot",
+  //   user: {
+  //     id: 2,
+  //     firstName: "Yohan",
+  //     lastName: "Kim",
+  //     password: "",
+  //     interest: "music, video",
+  //     skills: [],
+  //     linkedInURL: "https://linkedin.com",
+  //     dateAccountMade: (new Date()).toString()
+  //   },
+  //   description: "music video shoot using drone",
+  //   category: {
+  //     id: 1,
+  //     name: "Video",
+  //     description: "laskdjflas",
+  //     slug: "/projects/video"
+  //   },
+  //   timeCommitment: "2 months",
+  //   teamSize: 5,
+  //   toolsUsed: "React, Node.js",
+  //   paid: false,
+  //   fulfilled: false,
+  //   dateCreated: (new Date()).toString()
+  //   },
+  //   {
+  //     id: 6,
+  //     title: "Hiphop Dance Team",
+  //   user: {
+  //     id: 2,
+  //     firstName: "Alex",
+  //     lastName: "Steve",
+  //     password: "",
+  //     interest: "choreography",
+  //     skills: [],
+  //     linkedInURL: "https://linkedin.com",
+  //     dateAccountMade: (new Date()).toString()
+  //   },
+  //   description: "hiphop music choreography",
+  //   category: {
+  //     id: 1,
+  //     name: "Other",
+  //     description: "laskdjflas",
+  //     slug: "/projects/other"
+  //   },
+  //   timeCommitment: "2 months",
+  //   teamSize: 5,
+  //   toolsUsed: "React, Node.js",
+  //   paid: false,
+  //   fulfilled: false,
+  //   dateCreated: (new Date()).toString()
+  //   },
+  //   {
+  //     id: 7,
+  //     title: "Jazz Band",
+  //   user: {
+  //     id: 6,
+  //     firstName: "Paul",
+  //     lastName: "Merril",
+  //     password: "",
+  //     interest: "jazz",
+  //     skills: [],
+  //     linkedInURL: "https://linkedin.com",
+  //     dateAccountMade: (new Date()).toString()
+  //   },
+  //   description: "looking for people interested in forming a jazz band",
+  //   category: {
+  //     id: 1,
+  //     name: "Music",
+  //     description: "laskdjflas",
+  //     slug: "/projects/music"
+  //   },
+  //   timeCommitment: "2 months",
+  //   teamSize: 5,
+  //   toolsUsed: "React, Node.js",
+  //   paid: false,
+  //   fulfilled: false,
+  //   dateCreated: (new Date()).toString()
+  //   },
+  //   {
+  //     id: 4,
+  //     title: "Blockchain smart contract",
+  //   user: {
+  //     id: 2,
+  //     firstName: "Mindy",
+  //     lastName: "Zhu",
+  //     password: "",
+  //     interest: "blockchain",
+  //     skills: ["solidity programming language"],
+  //     linkedInURL: "https://linkedin.com",
+  //     dateAccountMade: (new Date()).toString()
+  //   },
+  //   description: "Smart contract dev using Solidity",
+  //   category: {
+  //     id: 1,
+  //     name: "Tech",
+  //     description: "laskdjflas",
+  //     slug: "/projects/tech"
+  //   },
+  //   timeCommitment: "2 months",
+  //   teamSize: 5,
+  //   toolsUsed: "React, Node.js",
+  //   paid: false,
+  //   fulfilled: false,
+  //   dateCreated: (new Date()).toString()
+  //   },
+  //   {
+  //     id: 8,
+  //     title: "NFT",
+  //   user: {
+  //     id: 2,
+  //     firstName: "Rachel",
+  //     lastName: "Snowman",
+  //     password: "",
+  //     interest: "blockchain dev",
+  //     skills: [],
+  //     linkedInURL: "https://linkedin.com",
+  //     dateAccountMade: (new Date()).toString()
+  //   },
+  //   description: "Looking for people interested in collaborative cooking & baking",
+  //   category: {
+  //     id: 1,
+  //     name: "Tech",
+  //     description: "laskdjflas",
+  //     slug: "/projects/tech"
+  //   },
+  //   timeCommitment: "2 months",
+  //   teamSize: 5,
+  //   toolsUsed: "React, Node.js",
+  //   paid: false,
+  //   fulfilled: false,
+  //   dateCreated: (new Date()).toString()
+  //   }
+  // ]
 
   return (
   //   <BrowserRouter>

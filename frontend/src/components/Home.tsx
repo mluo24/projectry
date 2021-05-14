@@ -25,38 +25,38 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 
-const categoryCardList = [
-    {
-        name: "Design",
-        description: "Description placeholder",
-        slug: "/projects/design"
-    },
-    {
-        name: "Art",
-        description: "Description placeholder",
-        slug: "/projects/art"
-    },
-    {
-        name: "Video",
-        description: "Description placeholder",
-        slug: "/projects/video"
-    },
-    {
-        name: "Music",
-        description: "Description placeholder",
-        slug: "/projects/music"
-    },
-    {
-        name: "Tech",
-        description: "Description placeholder",
-        slug: "/projects/tech"
-    },
-    {
-        name: "Other",
-        description: "Description placeholder",
-        slug: "/proejects/other"
-    }
-];
+// const categoryCardList = [
+//     {
+//         name: "Design",
+//         description: "Description placeholder",
+//         slug: "/projects/design"
+//     },
+//     {
+//         name: "Art",
+//         description: "Description placeholder",
+//         slug: "/projects/art"
+//     },
+//     {
+//         name: "Video",
+//         description: "Description placeholder",
+//         slug: "/projects/video"
+//     },
+//     {
+//         name: "Music",
+//         description: "Description placeholder",
+//         slug: "/projects/music"
+//     },
+//     {
+//         name: "Tech",
+//         description: "Description placeholder",
+//         slug: "/projects/tech"
+//     },
+//     {
+//         name: "Other",
+//         description: "Description placeholder",
+//         slug: "/proejects/other"
+//     }
+// ];
 
 const CategoryCards = () => {
 
@@ -65,7 +65,9 @@ const CategoryCards = () => {
     useEffect(() => {
         axios.get<DataType>('/getCategories').then(response => {
             setCategories(response.data);
-        })
+        }).catch((error) => {
+            console.log(error)
+        }) 
     }, [categories]);
 
     const classes = useStyles();

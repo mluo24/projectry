@@ -4,11 +4,12 @@ import axios from 'axios';
 import { firestore } from 'firebase-admin';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { ProjectNoID } from '../forms/CreateProjectForm';
 import { category } from './Header';
 import { user } from './User';
 
 export type project = {
-    id: number,
+    id: string,
     title: string,
     user: user,
     description: string,
@@ -21,18 +22,8 @@ export type project = {
     dateCreated: string
 }
 
-export type projectFirebase = {
-    id: number,
-    title: string,
-    uid: string,
-    description: string,
-    catid: string,
-    timeCommitment: string,
-    teamSize: number,
-    toolsUsed: string[],
-    paid: boolean,
-    fulfilled: boolean,
-    dateCreated: firestore.Timestamp
+export type projectFirebase = ProjectNoID & {
+    id: string
 }
 
 
@@ -65,7 +56,7 @@ const Post = () => {
                 {projectPost.title}
             </Typography>
             {/* <Typography variant="subtitle2">
-                Made by on {projectPost.dateCreated}
+                Made on {projectPost.dateCreated.toDate().toString()}
             </Typography> */}
             <Grid container spacing={4}>
                 <Grid item xs={12} md={8}>

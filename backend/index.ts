@@ -138,7 +138,6 @@ app.get('/getProjectById/:id', async (req, res) => {
   const id = req.params.id;
   const projectsSnapshot = await projectsCollection.doc(id).get();
   const project: ProjectWithID = projectsSnapshot.data() as ProjectWithID;
-  console.log(project.dateCreated)
   res.send(project);
 });
 
