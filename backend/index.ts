@@ -1,6 +1,8 @@
 // import type { Timestamp } from '@firebase/firestore-types';
 import admin, { firestore } from 'firebase-admin';
 import express from 'express';
+import cors from 'cors';
+import path from 'path';
 
 const serviceAccount = require('../service-account.json');
 
@@ -10,6 +12,9 @@ admin.initializeApp({
 
 const db = admin.firestore();
 const app = express();
+app.use(cors());
+app.use(express.static(path.join(__dirname, '../frontend/build')));
+app.use(express.json());
 const port = 8080;
 app.use(express.json());
 
